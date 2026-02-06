@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { unstable_noStore } from 'next/cache';
 
 export type DashboardStats = {

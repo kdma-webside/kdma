@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '@/lib/db';
+import prisma from '@/lib/prisma';
 
 export async function sendOtp(phone: string) {
     // Generate a 6-digit code
@@ -56,15 +56,38 @@ export async function verifyOtp(phone: string, code: string) {
         return { success: false, message: 'OTP has expired. Please request a new one.' };
     }
 
-    // Determine correctness -> Delete the record to prevent reuse? 
-    // Usually yes, but for now we just return success. 
-    // Ideally, we verify it here, and then during registration we might verify it again? 
-    // Or we just trust the client state? 
-    // Best practice: The registration action should also verify it, OR we mark it as verified in DB.
-    // Let's keep it simple: Client verifies, then sends registration. 
-    // To be secure, `createUser` should theoretically re-check or we assume trust for this MVP.
-    // For a cleaner flow, we can delete it here to prevent reuse.
-    await prisma.otpVerification.delete({ where: { phone } });
+    // Securely mark as verified instead of deleting
+    // This allows the subsequent createUser call to check verification status server-side
+    await prisma.otpVerification.update({
+        where: { phone },
+        data: { verifiedAt: new Date() }
+    });
 
     return { success: true };
+}
+
+/**
+ * Server-internal check to ensure a phone was verified recently.
+ * To be used by createUser or other sensitive actions.
+ */
+export async function isPhoneVerified(phone: string) {
+    const record = await prisma.otpVerification.findUnique({
+        where: { phone }
+    });
+
+    if (!record || !record.verifiedAt) return false;
+
+    // Optional: Only trust verification for a short window (e.g., 30 mins)
+    const verificationWindow = 30 * 60 * 1000;
+    const isRecent = (Date.now() - record.verifiedAt.getTime()) < verificationWindow;
+
+    return isRecent;
+}
+
+export async function clearVerification(phone: string) {
+    try {
+        await prisma.otpVerification.delete({ where: { phone } });
+    } catch (e) {
+        // Ignore if already deleted
+    }
 }

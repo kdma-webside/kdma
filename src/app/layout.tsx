@@ -10,12 +10,14 @@ export const metadata = {
   description: "Official Association for Mallakhamb in Kanyakumari District.",
 };
 
-import CustomCursor from "@/components/CustomCursor";
+import MagicCursor from "@/components/MagicCursor";
+import LoadingBar from "@/components/LoadingBar";
 import ScrollToTop from "@/components/ScrollToTop";
 import CartDrawer from "@/components/CartDrawer";
 import EnquiryModal from "@/components/EnquiryModal";
 import { CartProvider } from "@/context/CartContext";
 import { EnquiryProvider } from "@/context/EnquiryContext";
+import { CursorProvider } from "@/context/CursorContext";
 
 export default function RootLayout({
   children,
@@ -27,11 +29,14 @@ export default function RootLayout({
       <body className="antialiased cursor-none bg-black">
         <CartProvider>
           <EnquiryProvider>
-            <ScrollToTop />
-            <CustomCursor />
-            <CartDrawer />
-            <EnquiryModal />
-            {children}
+            <CursorProvider>
+              <LoadingBar />
+              <ScrollToTop />
+              <MagicCursor />
+              <CartDrawer />
+              <EnquiryModal />
+              {children}
+            </CursorProvider>
           </EnquiryProvider>
         </CartProvider>
       </body>

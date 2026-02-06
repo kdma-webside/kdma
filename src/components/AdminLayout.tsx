@@ -14,7 +14,8 @@ import {
     X,
     Shield,
     Mail,
-    Lock as LockIcon
+    Lock as LockIcon,
+    Swords
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
@@ -33,6 +34,8 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { name: 'Store', href: '/admin/store', icon: ShoppingBag },
         { name: 'Events', href: '/admin/events', icon: Calendar },
         { name: 'Users', href: '/admin/users', icon: Shield },
+        { name: 'Trainings', href: '/admin/trainings', icon: Swords },
+        { name: 'Registrations', href: '/admin/registrations', icon: FileText },
         { name: 'Enquiries', href: '/admin/enquiries', icon: FileText },
         { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
         { name: 'Security', href: '/admin/password', icon: LockIcon },

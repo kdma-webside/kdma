@@ -1,12 +1,27 @@
 'use server';
 
-import prisma from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { revalidatePath, unstable_noStore } from 'next/cache';
 
 export async function getEvents() {
     unstable_noStore();
     try {
-        const events = await prisma.event.findMany();
+        const events = await prisma.event.findMany({
+            select: {
+                id: true,
+                title: true,
+                description: true,
+                eventDate: true,
+                month: true,
+                day: true,
+                location: true,
+                status: true,
+                image: true,
+                createdAt: true,
+                updatedAt: true,
+                formConfig: true
+            }
+        });
         if (!events) return [];
 
         // Sort manually in JS
@@ -84,4 +99,13 @@ export async function registerForEvent(eventId: string, data: any) {
         }
     });
     return registration;
+}
+
+export async function getEventRegistrations() {
+    return await prisma.eventRegistration.findMany({
+        include: {
+            event: true
+        },
+        orderBy: { createdAt: 'desc' }
+    });
 }

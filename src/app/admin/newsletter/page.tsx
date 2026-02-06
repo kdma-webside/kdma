@@ -9,8 +9,10 @@ import {
     updateNewsletterUpdate,
     deleteNewsletterUpdate
 } from '@/app/actions/newsletter';
-import { Mail, Send, Plus, Trash2, Edit3, Users, Clock, CheckCircle } from 'lucide-react';
+import { Mail, Send, Plus, Trash2, Edit3, Users, Clock, CheckCircle, Download } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
+import { exportToExcel } from '@/lib/exportUtils';
+import DateFilter from '@/components/admin/DateFilter';
 
 const NewsletterManagement = () => {
     const [subscribers, setSubscribers] = useState<any[]>([]);
@@ -18,6 +20,8 @@ const NewsletterManagement = () => {
     const [isLoading, setIsLoading] = useState(false);
     const [isCreating, setIsCreating] = useState(false);
     const [newUpdate, setNewUpdate] = useState({ subject: '', content: '' });
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     useEffect(() => {
         loadData();
@@ -32,6 +36,39 @@ const NewsletterManagement = () => {
         setSubscribers(subData);
         setUpdates(updateData);
         setIsLoading(false);
+    };
+
+    const filterByDate = (data: any[]) => {
+        if (!startDate && !endDate) return data;
+
+        return data.filter(item => {
+            const itemDate = new Date(item.createdAt);
+            const start = startDate ? new Date(startDate) : null;
+            const end = endDate ? new Date(endDate) : null;
+
+            if (start) start.setHours(0, 0, 0, 0);
+            if (end) end.setHours(23, 59, 59, 999);
+
+            if (start && itemDate < start) return false;
+            if (end && itemDate > end) return false;
+            return true;
+        });
+    };
+
+    const handleExport = () => {
+        const data = filterByDate(subscribers);
+
+        if (data.length === 0) {
+            alert('No subscribers to export for the selected range');
+            return;
+        }
+
+        const formattedData = data.map((sub: any) => ({
+            'Email': sub.email,
+            'Joined On': new Date(sub.createdAt).toLocaleDateString('en-GB')
+        }));
+
+        exportToExcel(formattedData, 'newsletter_subscribers', 'SUBSCRIBERS');
     };
 
     const handleCreate = async (e: React.FormEvent) => {
@@ -82,16 +119,35 @@ const NewsletterManagement = () => {
                 <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
                     {/* Left: Subscribers List */}
                     <div className="bg-[#080808] border border-white/5 rounded-[40px] p-8 space-y-8 lg:col-span-1 max-h-[600px] overflow-hidden flex flex-col">
-                        <div className="flex justify-between items-center">
-                            <h3 className="text-white text-lg font-black uppercase tracking-tight flex items-center gap-3">
-                                <Users size={20} className="text-blue-500" />
-                                Warriors <span className="text-blue-500/50">Joined</span>
-                            </h3>
-                            <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-full text-[10px] font-black uppercase">{subscribers.length}</span>
+                        <div className="flex flex-col space-y-4">
+                            <div className="flex justify-between items-center">
+                                <h3 className="text-white text-lg font-black uppercase tracking-tight flex items-center gap-3">
+                                    <Users size={20} className="text-blue-500" />
+                                    Warriors <span className="text-blue-500/50">Joined</span>
+                                </h3>
+                                <div className="flex items-center gap-2">
+                                    <button
+                                        onClick={handleExport}
+                                        title="Export to Excel"
+                                        className="p-2 bg-white/5 hover:bg-white/10 rounded-lg text-white/40 hover:text-orange-500 transition-all"
+                                    >
+                                        <Download size={14} />
+                                    </button>
+                                    <span className="bg-blue-500/10 text-blue-500 px-3 py-1 rounded-full text-[10px] font-black uppercase">{filterByDate(subscribers).length}</span>
+                                </div>
+                            </div>
+
+                            <DateFilter
+                                startDate={startDate}
+                                endDate={endDate}
+                                onStartDateChange={setStartDate}
+                                onEndDateChange={setEndDate}
+                                label="Join Date Range"
+                            />
                         </div>
 
                         <div className="flex-grow overflow-y-auto space-y-3 custom-scrollbar pr-2">
-                            {subscribers.map((sub) => (
+                            {filterByDate(subscribers).map((sub: any) => (
                                 <motion.div
                                     key={sub.id}
                                     initial={{ opacity: 0, x: -10 }}
@@ -109,9 +165,11 @@ const NewsletterManagement = () => {
                                     </span>
                                 </motion.div>
                             ))}
-                            {subscribers.length === 0 && (
+                            {filterByDate(subscribers).length === 0 && (
                                 <div className="text-center py-10">
-                                    <p className="text-gray-600 text-[10px] font-black uppercase tracking-widest">No practitioners in the circle yet.</p>
+                                    <p className="text-gray-600 text-[10px] font-black uppercase tracking-widest">
+                                        {(startDate || endDate) ? "No practitioners match the range." : "No practitioners in the circle yet."}
+                                    </p>
                                 </div>
                             )}
                         </div>

@@ -1,5 +1,18 @@
 @import "tailwindcss";
 
+/* Force hide cursor globally */
+*,
+*::before,
+*::after,
+a,
+button,
+[role="button"],
+input,
+select,
+textarea {
+  cursor: none !important;
+}
+
 :root {
   --background: #ffffff;
   --foreground: #171717;

@@ -16,9 +16,22 @@ export default function ResetPasswordPage() {
     const [newPassword, setNewPassword] = useState('');
     const [error, setError] = useState<string | null>(null);
 
+    // Auto-fill from URL parameters
+    useEffect(() => {
+        const params = new URLSearchParams(window.location.search);
+        const emailParam = params.get('email');
+        const tokenParam = params.get('token');
+
+        if (emailParam) setEmail(emailParam);
+        if (tokenParam) setToken(tokenParam);
+    }, []);
+
     const handleSubmit = async (e: React.FormEvent) => {
         e.preventDefault();
-        if (token.length < 6) return;
+        if (token.length < 6) {
+            setError("Please enter the 6-digit magic code.");
+            return;
+        }
 
         setIsLoading(true);
         setError(null);
@@ -83,6 +96,7 @@ export default function ResetPasswordPage() {
                                     placeholder="hellokdma@gmail.com"
                                     className="w-full bg-white/5 border border-white/10 p-5 pl-14 rounded-2xl text-white font-sans focus:outline-none focus:border-orange-600/50 transition-all placeholder:text-white/10 text-sm"
                                     required
+                                    value={email}
                                     onChange={(e) => setEmail(e.target.value)}
                                 />
                             </div>

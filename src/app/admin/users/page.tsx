@@ -2,14 +2,18 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { User, Mail, Phone, Calendar, Trash2, Search } from 'lucide-react';
+import { User, Mail, Phone, Calendar, Trash2, Search, Download } from 'lucide-react';
 import { getUsers, deleteUser } from '@/app/actions/users';
 import AdminLayout from '@/components/AdminLayout';
+import { exportToExcel } from '@/lib/exportUtils';
+import DateFilter from '@/components/admin/DateFilter';
 
 const UsersManagement = () => {
     const [users, setUsers] = useState<any[]>([]);
     const [searchTerm, setSearchTerm] = useState('');
     const [isLoading, setIsLoading] = useState(true);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     useEffect(() => {
         fetchUsers();
@@ -22,6 +26,44 @@ const UsersManagement = () => {
         setIsLoading(false);
     };
 
+    const filterByDate = (data: any[]) => {
+        if (!startDate && !endDate) return data;
+
+        return data.filter(item => {
+            const itemDate = new Date(item.createdAt);
+            const start = startDate ? new Date(startDate) : null;
+            const end = endDate ? new Date(endDate) : null;
+
+            if (start) start.setHours(0, 0, 0, 0);
+            if (end) end.setHours(23, 59, 59, 999);
+
+            if (start && itemDate < start) return false;
+            if (end && itemDate > end) return false;
+            return true;
+        });
+    };
+
+    const handleExport = () => {
+        const filtered = filterByDate(users).filter(user =>
+            user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+            user.email.toLowerCase().includes(searchTerm.toLowerCase())
+        );
+
+        if (filtered.length === 0) {
+            alert('No practitioners to export for the selected range/search');
+            return;
+        }
+
+        const formattedData = filtered.map(user => ({
+            'Name': user.name,
+            'Email': user.email,
+            'Phone': user.phone,
+            'Joined On': new Date(user.createdAt).toLocaleDateString('en-GB')
+        }));
+
+        exportToExcel(formattedData, 'registered_practitioners', 'USERS');
+    };
+
     const handleDelete = async (id: string) => {
         if (confirm('Are you sure you want to remove this practitioner?')) {
             await deleteUser(id);
@@ -29,7 +71,7 @@ const UsersManagement = () => {
         }
     };
 
-    const filteredUsers = users.filter(user =>
+    const filteredUsers = filterByDate(users).filter(user =>
         user.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
         user.email.toLowerCase().includes(searchTerm.toLowerCase())
     );
@@ -38,12 +80,30 @@ const UsersManagement = () => {
         <div className="space-y-12">
             {/* Header Area */}
             <div className="flex flex-col md:flex-row md:items-end justify-between gap-8">
-                <div>
-                    <div className="flex items-center gap-3 mb-4">
-                        <span className="text-orange-500 text-[10px] font-black tracking-[0.5em] uppercase">Academy Roster</span>
-                        <div className="h-px w-12 bg-orange-600/30" />
+                <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6 flex-grow">
+                    <div>
+                        <div className="flex items-center gap-3 mb-4">
+                            <span className="text-orange-500 text-[10px] font-black tracking-[0.5em] uppercase">Academy Roster</span>
+                            <div className="h-px w-12 bg-orange-600/30" />
+                        </div>
+                        <h2 className="text-white text-5xl font-black tracking-tighter uppercase">Registered <span className="text-orange-600">Practitioners</span></h2>
                     </div>
-                    <h2 className="text-white text-5xl font-black tracking-tighter uppercase">Registered <span className="text-orange-600">Practitioners</span></h2>
+
+                    <div className="flex flex-col md:flex-row items-end gap-6">
+                        <DateFilter
+                            startDate={startDate}
+                            endDate={endDate}
+                            onStartDateChange={setStartDate}
+                            onEndDateChange={setEndDate}
+                        />
+                        <button
+                            onClick={handleExport}
+                            className="bg-orange-600 text-white px-6 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-700 transition-all flex items-center gap-3 shadow-[0_10px_20px_rgba(234,88,12,0.2)]"
+                        >
+                            <Download size={18} />
+                            Export Excel
+                        </button>
+                    </div>
                 </div>
 
                 <div className="relative group">

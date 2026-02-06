@@ -89,7 +89,7 @@ export default function ForgotPasswordPage() {
                             >
                                 {isLoading ? <Loader2 className="animate-spin" /> : (
                                     <>
-                                        Send Magic Code
+                                        Send Reset Link
                                         <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
                                     </>
                                 )}

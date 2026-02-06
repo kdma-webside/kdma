@@ -1,6 +1,6 @@
 'use server';
 
-import prisma from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { revalidatePath, unstable_noStore } from 'next/cache';
 
 export async function getProducts() {

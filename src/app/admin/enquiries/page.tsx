@@ -2,13 +2,17 @@
 
 import React, { useEffect, useState } from 'react';
 import { motion } from 'framer-motion';
-import { Mail, Phone, Calendar, Trash2, CheckCircle2, Clock, Shield } from 'lucide-react';
+import { Mail, Phone, Calendar, Trash2, CheckCircle2, Clock, Shield, Download } from 'lucide-react';
 import { getEnquiries, updateEnquiryStatus, deleteEnquiry } from '@/app/actions/enquiries';
 import AdminLayout from '@/components/AdminLayout';
+import { exportToExcel } from '@/lib/exportUtils';
+import DateFilter from '@/components/admin/DateFilter';
 
 const EnquiriesManagement = () => {
     const [enquiries, setEnquiries] = useState<any[]>([]);
     const [isLoading, setIsLoading] = useState(true);
+    const [startDate, setStartDate] = useState('');
+    const [endDate, setEndDate] = useState('');
 
     useEffect(() => {
         fetchEnquiries();
@@ -19,6 +23,43 @@ const EnquiriesManagement = () => {
         const data = await getEnquiries();
         setEnquiries(data);
         setIsLoading(false);
+    };
+
+    const filterByDate = (data: any[]) => {
+        if (!startDate && !endDate) return data;
+
+        return data.filter(item => {
+            const itemDate = new Date(item.createdAt);
+            const start = startDate ? new Date(startDate) : null;
+            const end = endDate ? new Date(endDate) : null;
+
+            if (start) start.setHours(0, 0, 0, 0);
+            if (end) end.setHours(23, 59, 59, 999);
+
+            if (start && itemDate < start) return false;
+            if (end && itemDate > end) return false;
+            return true;
+        });
+    };
+
+    const handleExport = () => {
+        const data = filterByDate(enquiries);
+
+        if (data.length === 0) {
+            alert('No data to export for the selected range');
+            return;
+        }
+
+        const formattedData = enquiries.map(item => ({
+            'Name': item.name,
+            'Email': item.email,
+            'Phone': item.phone,
+            'Interest': item.interest,
+            'Status': item.status,
+            'Date': new Date(item.createdAt).toLocaleDateString('en-GB')
+        }));
+
+        exportToExcel(formattedData, 'portal_enquiries', 'ENQUIRIES');
     };
 
     const handleStatusUpdate = async (id: string, status: string) => {
@@ -45,13 +86,31 @@ const EnquiriesManagement = () => {
     return (
         <div className="space-y-12">
             {/* Header Area */}
-            <div>
-                <div className="flex items-center gap-3 mb-4">
-                    <span className="text-orange-500 text-[10px] font-black tracking-[0.5em] uppercase">Recruitment Portal</span>
-                    <div className="h-px w-12 bg-orange-600/30" />
+            <div className="flex flex-col md:flex-row justify-between items-start md:items-end gap-6">
+                <div>
+                    <div className="flex items-center gap-3 mb-4">
+                        <span className="text-orange-500 text-[10px] font-black tracking-[0.5em] uppercase">Recruitment Portal</span>
+                        <div className="h-px w-12 bg-orange-600/30" />
+                    </div>
+                    <h2 className="text-white text-5xl font-black tracking-tighter uppercase text-orange-600">Portal <span className="text-white">Leads</span></h2>
+                    <p className="text-gray-500 text-sm font-sans mt-4 max-w-xl">Track and manage potential practitioners who have submitted credentials through the recruitment portal.</p>
                 </div>
-                <h2 className="text-white text-5xl font-black tracking-tighter uppercase text-orange-600">Portal <span className="text-white">Leads</span></h2>
-                <p className="text-gray-500 text-sm font-sans mt-4 max-w-xl">Track and manage potential practitioners who have submitted credentials through the recruitment portal.</p>
+
+                <div className="flex flex-col md:flex-row items-end gap-6">
+                    <DateFilter
+                        startDate={startDate}
+                        endDate={endDate}
+                        onStartDateChange={setStartDate}
+                        onEndDateChange={setEndDate}
+                    />
+                    <button
+                        onClick={handleExport}
+                        className="bg-orange-600 text-white px-6 py-4 rounded-2xl font-black text-xs uppercase tracking-widest hover:bg-orange-700 transition-all flex items-center gap-3 shadow-[0_10px_20px_rgba(234,88,12,0.2)]"
+                    >
+                        <Download size={18} />
+                        Export Excel
+                    </button>
+                </div>
             </div>
 
             {/* Enquiries Grid */}
@@ -60,12 +119,12 @@ const EnquiriesManagement = () => {
                     <div className="col-span-full py-20 text-center text-gray-500 font-black uppercase tracking-widest animate-pulse">
                         Accessing Encryption...
                     </div>
-                ) : enquiries.length === 0 ? (
+                ) : filterByDate(enquiries).length === 0 ? (
                     <div className="col-span-full py-20 text-center text-gray-500 font-black uppercase tracking-widest">
-                        The recruitment portal is currently silent.
+                        {(startDate || endDate) ? "No leads found for the selected range." : "The recruitment portal is currently silent."}
                     </div>
                 ) : (
-                    enquiries.map((enquiry) => (
+                    filterByDate(enquiries).map((enquiry) => (
                         <motion.div
                             initial={{ opacity: 0, scale: 0.95 }}
                             animate={{ opacity: 1, scale: 1 }}

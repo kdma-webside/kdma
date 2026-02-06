@@ -1,7 +1,8 @@
 'use server';
 
-import prisma from '@/lib/db';
+import prisma from '@/lib/prisma';
 import { revalidatePath } from 'next/cache';
+import { setSession, deleteSession, getSession } from '@/lib/auth';
 
 export async function getUsers() {
     return await prisma.user.findMany({
@@ -18,6 +19,9 @@ export async function createUser(data: any) {
             password: data.password, // In a production app, hash this
         }
     });
+
+    await setSession({ id: user.id, name: user.name, email: user.email });
+
     revalidatePath('/admin/users');
     return user;
 }
@@ -35,7 +39,19 @@ export async function verifyUser(data: any) {
         throw new Error('Invalid credentials');
     }
 
-    return { success: true, user: { id: user.id, name: user.name, email: user.email } };
+    const userData = { id: user.id, name: user.name, email: user.email };
+    await setSession(userData);
+
+    return { success: true, user: userData };
+}
+
+export async function logout() {
+    await deleteSession();
+    revalidatePath('/');
+}
+
+export async function getCurrentSession() {
+    return await getSession();
 }
 
 export async function deleteUser(id: string) {
