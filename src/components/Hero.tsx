@@ -5,6 +5,7 @@ import { motion } from 'framer-motion';
 import Image from 'next/image';
 import Link from 'next/link';
 import { useEnquiry } from '@/context/EnquiryContext';
+import MagneticButton from '@/components/ui/MagneticButton';
 
 const FireParticles = () => {
     const [particles, setParticles] = useState<any[]>([]);
@@ -137,16 +138,20 @@ const Hero = ({
                     transition={{ delay: 0.8 }}
                     className="flex flex-col sm:flex-row gap-6 md:gap-8 items-center justify-center lg:justify-start"
                 >
-                    <button
-                        onClick={openEnquiry}
-                        className="w-full sm:w-auto relative group overflow-hidden bg-orange-600 text-white px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm shadow-[0_10px_30px_rgba(249,115,22,0.3)] uppercase font-sans transition-all hover:scale-105 active:bg-orange-700 active:scale-95"
-                    >
-                        <span className="relative z-10">JOIN ASSOCIATION</span>
-                        <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-10" />
-                    </button>
-                    <button className="w-full sm:w-auto border-2 border-white/10 hover:border-orange-600/50 active:border-orange-600/70 backdrop-blur-xl px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm transition-all uppercase font-sans text-white hover:bg-orange-600/10 active:bg-orange-600/20 active:scale-95">
-                        EXPLORE HERITAGE
-                    </button>
+                    <MagneticButton>
+                        <button
+                            onClick={openEnquiry}
+                            className="w-full sm:w-auto relative group overflow-hidden bg-orange-600 text-white px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm shadow-[0_10px_30px_rgba(249,115,22,0.3)] uppercase font-sans transition-all hover:scale-105 active:bg-orange-700 active:scale-95"
+                        >
+                            <span className="relative z-10">JOIN ASSOCIATION</span>
+                            <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-10" />
+                        </button>
+                    </MagneticButton>
+                    <MagneticButton>
+                        <button className="w-full sm:w-auto border-2 border-white/10 hover:border-orange-600/50 active:border-orange-600/70 backdrop-blur-xl px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm transition-all uppercase font-sans text-white hover:bg-orange-600/10 active:bg-orange-600/20 active:scale-95">
+                            EXPLORE HERITAGE
+                        </button>
+                    </MagneticButton>
                 </motion.div>
             </div>
 
@@ -163,46 +168,48 @@ const Hero = ({
             {/* Upcoming Event Quick Tag (Bottom Right) */}
             {(upcomingEvent || true) && (
                 <div className="absolute right-6 bottom-6 lg:right-12 lg:bottom-12 z-[100] flex items-center pointer-events-auto max-w-[calc(100vw-3rem)]">
-                    <Link href={`/events?id=${(upcomingEvent || {}).id || 'state-2024'}`}>
-                        <motion.div
-                            initial={{ opacity: 0, x: 50 }}
-                            animate={{ opacity: 1, x: 0 }}
-                            transition={{ delay: 0.5, duration: 0.8 }}
-                            className="hidden sm:flex items-center gap-3 md:gap-5 bg-[#121212]/80 backdrop-blur-2xl border border-white/10 p-2 md:p-3 pr-4 md:pr-6 rounded-2xl group cursor-pointer hover:bg-orange-600/10 hover:border-orange-600/30 active:bg-orange-600/20 active:border-orange-600/50 active:scale-[0.98] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
-                        >
-                            <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 shadow-lg">
-                                <Image
-                                    src={(upcomingEvent || {}).image || "/images/unified-hero-athlete.png"}
-                                    alt={(upcomingEvent || {}).title || "Next Event"}
-                                    fill
-                                    className="object-cover group-hover:scale-110 group-active:scale-110 transition-transform duration-700"
-                                />
-                                <div className="absolute inset-0 bg-orange-600/10 group-hover:bg-transparent transition-colors" />
-                            </div>
-                            <div className="flex flex-col">
-                                <div className="flex items-center gap-2 mb-1">
-                                    <span className="relative flex h-1.5 w-1.5">
-                                        <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
-                                        <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-500"></span>
-                                    </span>
-                                    <span className="text-orange-500 text-[10px] font-black tracking-[0.2em] uppercase">Upcoming Milestone</span>
+                    <MagneticButton>
+                        <Link href={`/events?id=${(upcomingEvent || {}).id || 'state-2024'}`}>
+                            <motion.div
+                                initial={{ opacity: 0, x: 50 }}
+                                animate={{ opacity: 1, x: 0 }}
+                                transition={{ delay: 0.5, duration: 0.8 }}
+                                className="hidden sm:flex items-center gap-3 md:gap-5 bg-[#121212]/80 backdrop-blur-2xl border border-white/10 p-2 md:p-3 pr-4 md:pr-6 rounded-2xl group cursor-pointer hover:bg-orange-600/10 hover:border-orange-600/30 active:bg-orange-600/20 active:border-orange-600/50 active:scale-[0.98] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                            >
+                                <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 shadow-lg">
+                                    <Image
+                                        src={(upcomingEvent || {}).image || "/images/unified-hero-athlete.png"}
+                                        alt={(upcomingEvent || {}).title || "Next Event"}
+                                        fill
+                                        className="object-cover group-hover:scale-110 group-active:scale-110 transition-transform duration-700"
+                                    />
+                                    <div className="absolute inset-0 bg-orange-600/10 group-hover:bg-transparent transition-colors" />
                                 </div>
-                                <h4 className="text-white text-xs font-black tracking-tight uppercase leading-none mb-1.5 group-hover:text-orange-500 group-active:text-orange-500 transition-colors">
-                                    {(upcomingEvent || {}).title || "Annual Championship"}
-                                </h4>
-                                <span className="text-white/40 text-[9px] font-bold uppercase tracking-widest">
-                                    {(upcomingEvent || {}).month || (upcomingEvent || {}).date?.month || "Oct"} {(upcomingEvent || {}).day || (upcomingEvent || {}).date?.day || "15"} • {(upcomingEvent || {}).location || "Main Stadium"}
-                                </span>
-                            </div>
+                                <div className="flex flex-col">
+                                    <div className="flex items-center gap-2 mb-1">
+                                        <span className="relative flex h-1.5 w-1.5">
+                                            <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-orange-400 opacity-75"></span>
+                                            <span className="relative inline-flex rounded-full h-1.5 w-1.5 bg-orange-500"></span>
+                                        </span>
+                                        <span className="text-orange-500 text-[10px] font-black tracking-[0.2em] uppercase">Upcoming Milestone</span>
+                                    </div>
+                                    <h4 className="text-white text-xs font-black tracking-tight uppercase leading-none mb-1.5 group-hover:text-orange-500 group-active:text-orange-500 transition-colors">
+                                        {(upcomingEvent || {}).title || "Annual Championship"}
+                                    </h4>
+                                    <span className="text-white/40 text-[9px] font-bold uppercase tracking-widest">
+                                        {(upcomingEvent || {}).month || (upcomingEvent || {}).date?.month || "Oct"} {(upcomingEvent || {}).day || (upcomingEvent || {}).date?.day || "15"} • {(upcomingEvent || {}).location || "Main Stadium"}
+                                    </span>
+                                </div>
 
-                            <div className="ml-2 text-orange-600 opacity-0 group-hover:opacity-100 transition-opacity">
-                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
-                                    <line x1="5" y1="12" x2="19" y2="12"></line>
-                                    <polyline points="12 5 19 12 12 19"></polyline>
-                                </svg>
-                            </div>
-                        </motion.div>
-                    </Link>
+                                <div className="ml-2 text-orange-600 opacity-0 group-hover:opacity-100 transition-opacity">
+                                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                                        <line x1="5" y1="12" x2="19" y2="12"></line>
+                                        <polyline points="12 5 19 12 12 19"></polyline>
+                                    </svg>
+                                </div>
+                            </motion.div>
+                        </Link>
+                    </MagneticButton>
                 </div>
             )}
         </section>
