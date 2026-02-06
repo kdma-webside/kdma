@@ -1,19 +1,32 @@
 const { PrismaClient } = require('@prisma/client');
 const { PrismaLibSql } = require('@prisma/adapter-libsql');
 const path = require('path');
+require('dotenv').config();
 
 async function main() {
     console.log('Starting seed...');
 
-    const dbPath = path.join(__dirname, '..', 'dev.db');
-    const databaseUrl = `file:${dbPath}`;
+    const databaseUrl = process.env.DATABASE_URL;
+    const authToken = process.env.TURSO_AUTH_TOKEN;
+
+    if (!databaseUrl) {
+        throw new Error('DATABASE_URL environment variable is not set');
+    }
 
     console.log(`Using Database URL: ${databaseUrl}`);
 
-    const adapter = new PrismaLibSql({
-        url: databaseUrl,
-    });
-    const prisma = new PrismaClient({ adapter });
+    let prisma;
+    if (databaseUrl.startsWith('libsql:')) {
+        console.log('Using LibSQL adapter for Turso');
+        const adapter = new PrismaLibSql({
+            url: databaseUrl,
+            authToken: authToken,
+        });
+        prisma = new PrismaClient({ adapter });
+    } else {
+        console.log('Using default Prisma client');
+        prisma = new PrismaClient();
+    }
 
     try {
         // 1. Create Admin
@@ -33,12 +46,14 @@ async function main() {
             { key: 'store.hero_title', value: 'EQUIP YOUR ARMORY', area: 'Store', type: 'text' },
         ];
 
+        console.log('Seeding SiteContent...');
         for (const content of siteContent) {
-            await prisma.siteContent.upsert({
-                where: { key: content.key },
-                update: { value: content.value, area: content.area, type: content.type },
-                create: content
-            });
+            const existing = await prisma.siteContent.findUnique({ where: { key: content.key } });
+            if (existing) {
+                await prisma.siteContent.update({ where: { id: existing.id }, data: content });
+            } else {
+                await prisma.siteContent.create({ data: content });
+            }
         }
 
         // 3. Products
@@ -81,9 +96,14 @@ async function main() {
             }
         ];
 
-        await prisma.product.deleteMany({});
+        console.log('Seeding Products...');
         for (const product of products) {
-            await prisma.product.create({ data: product });
+            const existing = await prisma.product.findFirst({ where: { name: product.name } });
+            if (existing) {
+                await prisma.product.update({ where: { id: existing.id }, data: product });
+            } else {
+                await prisma.product.create({ data: product });
+            }
         }
 
         // 4. Events
@@ -120,9 +140,14 @@ async function main() {
             }
         ];
 
-        await prisma.event.deleteMany({});
+        console.log('Seeding Events...');
         for (const event of events) {
-            await prisma.event.create({ data: event });
+            const existing = await prisma.event.findFirst({ where: { title: event.title } });
+            if (existing) {
+                await prisma.event.update({ where: { id: existing.id }, data: event });
+            } else {
+                await prisma.event.create({ data: event });
+            }
         }
 
         console.log('Seed completed successfully');

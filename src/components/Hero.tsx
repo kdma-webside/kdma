@@ -55,7 +55,7 @@ const Hero = ({
     const { openEnquiry } = useEnquiry();
 
     return (
-        <section className="relative min-h-screen flex items-center px-6 md:px-12 lg:px-24 overflow-hidden bg-black text-white">
+        <section className="relative min-h-[80vh] md:min-h-screen flex items-center px-6 md:px-12 lg:px-24 overflow-hidden bg-black text-white">
             {/* Seamless Background Arena */}
             <div className="absolute inset-0 z-0">
                 <Image
@@ -95,13 +95,13 @@ const Hero = ({
             </div>
 
             {/* Main Content Area */}
-            <div className="relative z-40 max-w-5xl pt-24">
+            <div className="relative z-40 w-full lg:max-w-5xl pt-24 flex flex-col items-center lg:items-start">
                 <motion.div
                     initial={{ opacity: 0, x: -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    className="flex items-center space-x-6 mb-8 underline decoration-orange-600 underline-offset-8"
+                    className="flex justify-center lg:justify-start items-center space-x-6 mb-8 underline decoration-orange-600 underline-offset-8"
                 >
-                    <span className="text-orange-500 text-xs tracking-[0.8em] font-black uppercase font-sans">KANYAKUMARI DISTRICT MALLKAMBH ASSOCIATION (KDMA)</span>
+                    <span className="text-orange-500 text-[10px] md:text-xs tracking-[0.5em] md:tracking-[0.8em] font-black uppercase font-sans text-center">KANYAKUMARI DISTRICT MALLKAMBH ASSOCIATION (KDMA)</span>
                 </motion.div>
 
                 <motion.div
@@ -109,7 +109,7 @@ const Hero = ({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-white text-5xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-[0.85] uppercase mb-12">
+                    <h1 className="text-white text-3xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-[0.95] md:leading-[0.85] uppercase mb-12 text-center lg:text-left">
                         {headline.split(' ').slice(0, -1).join(' ')} <br />
                         <span className="text-orange-600">{headline.split(' ').slice(-1)}</span>
                     </h1>
@@ -119,12 +119,12 @@ const Hero = ({
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
                     transition={{ delay: 0.5 }}
-                    className="mb-16 space-y-4 max-w-2xl"
+                    className="mb-16 space-y-4 max-w-2xl mx-auto lg:mx-0"
                 >
-                    <p className="text-white/70 text-lg font-sans font-medium leading-relaxed">
+                    <p className="text-white/70 text-base md:text-lg font-sans font-medium leading-relaxed text-center lg:text-left">
                         {subheadline}
                     </p>
-                    <div className="flex flex-wrap gap-8 text-[10px] tracking-[0.4em] font-black text-orange-500/80 uppercase">
+                    <div className="flex flex-wrap justify-center lg:justify-start gap-4 md:gap-8 text-[8px] md:text-[10px] tracking-[0.4em] font-black text-orange-500/80 uppercase">
                         <p className="flex items-center"><span className="w-1.5 h-1.5 bg-orange-600 rounded-full mr-3" /> TRADITION</p>
                         <p className="flex items-center"><span className="w-1.5 h-1.5 bg-orange-600 rounded-full mr-3" /> MASTERY</p>
                         <p className="flex items-center"><span className="w-1.5 h-1.5 bg-orange-600 rounded-full mr-3" /> POWER</p>
@@ -135,16 +135,16 @@ const Hero = ({
                     initial={{ opacity: 0, y: 20 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.8 }}
-                    className="flex flex-col sm:flex-row gap-8"
+                    className="flex flex-col sm:flex-row gap-6 md:gap-8 items-center justify-center lg:justify-start"
                 >
                     <button
                         onClick={openEnquiry}
-                        className="relative group overflow-hidden bg-orange-600 text-white px-14 py-5 font-black tracking-widest text-sm shadow-[0_10px_30px_rgba(249,115,22,0.3)] uppercase font-sans transition-all hover:scale-105 active:bg-orange-700 active:scale-95"
+                        className="w-full sm:w-auto relative group overflow-hidden bg-orange-600 text-white px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm shadow-[0_10px_30px_rgba(249,115,22,0.3)] uppercase font-sans transition-all hover:scale-105 active:bg-orange-700 active:scale-95"
                     >
                         <span className="relative z-10">JOIN ASSOCIATION</span>
                         <div className="absolute inset-0 bg-white transform translate-y-full group-hover:translate-y-0 transition-transform duration-300 opacity-10" />
                     </button>
-                    <button className="border-2 border-white/10 hover:border-orange-600/50 active:border-orange-600/70 backdrop-blur-xl px-14 py-5 font-black tracking-widest text-sm transition-all uppercase font-sans text-white hover:bg-orange-600/10 active:bg-orange-600/20 active:scale-95">
+                    <button className="w-full sm:w-auto border-2 border-white/10 hover:border-orange-600/50 active:border-orange-600/70 backdrop-blur-xl px-10 md:px-14 py-4 md:py-5 font-black tracking-widest text-[11px] md:text-sm transition-all uppercase font-sans text-white hover:bg-orange-600/10 active:bg-orange-600/20 active:scale-95">
                         EXPLORE HERITAGE
                     </button>
                 </motion.div>
@@ -162,15 +162,15 @@ const Hero = ({
 
             {/* Upcoming Event Quick Tag (Bottom Right) */}
             {(upcomingEvent || true) && (
-                <div className="absolute right-6 bottom-8 lg:right-12 lg:bottom-12 z-[100] flex items-center pointer-events-auto">
+                <div className="absolute right-6 bottom-6 lg:right-12 lg:bottom-12 z-[100] flex items-center pointer-events-auto max-w-[calc(100vw-3rem)]">
                     <Link href={`/events?id=${(upcomingEvent || {}).id || 'state-2024'}`}>
                         <motion.div
                             initial={{ opacity: 0, x: 50 }}
                             animate={{ opacity: 1, x: 0 }}
                             transition={{ delay: 0.5, duration: 0.8 }}
-                            className="flex items-center gap-5 bg-[#121212]/80 backdrop-blur-2xl border border-white/10 p-3 pr-6 rounded-2xl group cursor-pointer hover:bg-orange-600/10 hover:border-orange-600/30 active:bg-orange-600/20 active:border-orange-600/50 active:scale-[0.98] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
+                            className="hidden sm:flex items-center gap-3 md:gap-5 bg-[#121212]/80 backdrop-blur-2xl border border-white/10 p-2 md:p-3 pr-4 md:pr-6 rounded-2xl group cursor-pointer hover:bg-orange-600/10 hover:border-orange-600/30 active:bg-orange-600/20 active:border-orange-600/50 active:scale-[0.98] transition-all shadow-[0_20px_50px_rgba(0,0,0,0.5)]"
                         >
-                            <div className="relative w-16 h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 shadow-lg">
+                            <div className="relative w-12 h-12 md:w-16 md:h-16 rounded-xl overflow-hidden flex-shrink-0 border border-white/10 shadow-lg">
                                 <Image
                                     src={(upcomingEvent || {}).image || "/images/unified-hero-athlete.png"}
                                     alt={(upcomingEvent || {}).title || "Next Event"}

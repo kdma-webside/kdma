@@ -76,11 +76,11 @@ const EventCard = ({ title, description, date, location, status, image, index, o
                     </div>
                 </div>
 
-                <h3 className={`text-white text-3xl lg:text-4xl font-black tracking-tighter transition-colors duration-300 uppercase font-sans mb-4 ${isActive ? 'text-orange-500' : 'group-hover:text-orange-500 group-active:text-orange-500'}`}>
+                <h3 className={`text-white text-2xl md:text-3xl lg:text-4xl font-black tracking-tighter transition-colors duration-300 uppercase font-sans mb-4 ${isActive ? 'text-orange-500' : 'group-hover:text-orange-500 group-active:text-orange-500'}`}>
                     {title}
                 </h3>
 
-                <p className="text-gray-400 text-sm lg:text-base leading-relaxed max-w-xl font-sans font-medium mb-8">
+                <p className="text-gray-400 text-xs md:text-sm lg:text-base leading-relaxed max-w-xl font-sans font-medium mb-8">
                     {description}
                 </p>
 
@@ -171,7 +171,7 @@ const Events = ({
                             <div className="h-[1px] w-12 bg-orange-600" />
                         </div>
 
-                        <h2 className="text-white text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-none font-sans mb-8">
+                        <h2 className="text-white text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-tight md:leading-none font-sans mb-8">
                             Events & <span className="text-orange-600">Milestones</span>
                         </h2>
 

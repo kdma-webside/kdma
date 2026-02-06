@@ -4,28 +4,20 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import { Shield, Lock, User, ArrowRight, Loader2 } from 'lucide-react';
 import { useRouter } from 'next/navigation';
+import { useActionState, useEffect } from 'react';
+import { loginAdmin } from '@/app/actions/admin';
 
 const AdminLoginPage = () => {
     const router = useRouter();
-    const [isLoading, setIsLoading] = useState(false);
-    const [credentials, setCredentials] = useState({ username: '', password: '' });
-    const [error, setError] = useState('');
+    const [state, formAction, isPending] = useActionState(loginAdmin, { success: false, message: '' });
 
-    const handleLogin = async (e: React.FormEvent) => {
-        e.preventDefault();
-        setIsLoading(true);
-        setError('');
-
-        // Simulation for now
-        setTimeout(() => {
-            if (credentials.username === 'admin' && credentials.password === 'malla_password_2026') {
-                router.push('/admin');
-            } else {
-                setError('INVALID ACCESS CREDENTIALS');
-                setIsLoading(false);
-            }
-        }, 1500);
-    };
+    // Redirect on success
+    // Using a side effect to handle redirect after state update
+    useEffect(() => {
+        if (state?.success) {
+            router.push('/admin');
+        }
+    }, [state, router]);
 
     return (
         <div className="min-h-screen bg-black flex items-center justify-center p-6 relative overflow-hidden">
@@ -49,17 +41,16 @@ const AdminLoginPage = () => {
                         <p className="text-gray-500 text-[10px] font-black tracking-[0.4em] uppercase">Security Protocol Active</p>
                     </div>
 
-                    <form onSubmit={handleLogin} className="space-y-6">
+                    <form action={formAction} className="space-y-6">
                         <div className="space-y-2 group">
                             <label className="text-orange-500 text-[10px] font-black tracking-widest uppercase ml-1">Administrator ID</label>
                             <div className="relative">
                                 <User size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-500 transition-colors" />
                                 <input
                                     required
+                                    name="username"
                                     type="text"
                                     placeholder="COMMANDER"
-                                    value={credentials.username}
-                                    onChange={(e) => setCredentials({ ...credentials, username: e.target.value })}
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-5 text-white font-sans text-sm focus:outline-none focus:border-orange-600/50 transition-all placeholder:text-white/5"
                                 />
                             </div>
@@ -71,31 +62,30 @@ const AdminLoginPage = () => {
                                 <Lock size={18} className="absolute left-4 top-1/2 -translate-y-1/2 text-white/20 group-focus-within:text-orange-500 transition-colors" />
                                 <input
                                     required
+                                    name="password"
                                     type="password"
                                     placeholder="••••••••"
-                                    value={credentials.password}
-                                    onChange={(e) => setCredentials({ ...credentials, password: e.target.value })}
                                     className="w-full bg-white/5 border border-white/10 rounded-2xl px-12 py-5 text-white font-sans text-sm focus:outline-none focus:border-orange-600/50 transition-all placeholder:text-white/5"
                                 />
                             </div>
                         </div>
 
-                        {error && (
+                        {state?.message && (
                             <motion.p
                                 initial={{ opacity: 0, y: -10 }}
                                 animate={{ opacity: 1, y: 0 }}
                                 className="text-red-500 text-[10px] font-black tracking-widest uppercase text-center"
                             >
-                                {error}
+                                {state.message}
                             </motion.p>
                         )}
 
                         <button
-                            disabled={isLoading}
+                            disabled={isPending}
                             type="submit"
                             className="w-full bg-orange-600 text-white p-5 rounded-2xl font-black tracking-[0.3em] text-xs uppercase hover:bg-orange-700 transition-all flex items-center justify-center gap-4 group disabled:opacity-50 shadow-[0_15px_30px_-5px_rgba(234,88,12,0.3)]"
                         >
-                            {isLoading ? (
+                            {isPending ? (
                                 <Loader2 className="animate-spin" size={20} />
                             ) : (
                                 <>

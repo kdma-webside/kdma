@@ -2,7 +2,8 @@
 
 import React, { useState } from 'react';
 import Link from 'next/link';
-import { usePathname } from 'next/navigation';
+import { usePathname, useRouter } from 'next/navigation';
+import { logoutAdmin } from '@/app/actions/admin';
 import {
     LayoutDashboard,
     ShoppingBag,
@@ -12,13 +13,20 @@ import {
     Menu,
     X,
     Shield,
-    Mail
+    Mail,
+    Lock as LockIcon
 } from 'lucide-react';
 import { motion, AnimatePresence } from 'framer-motion';
 
 const AdminLayout = ({ children }: { children: React.ReactNode }) => {
     const pathname = usePathname();
+    const router = useRouter();
     const [isSidebarOpen, setIsSidebarOpen] = useState(true);
+
+    const handleLogout = async () => {
+        await logoutAdmin();
+        router.push('/admin/login');
+    };
 
     const navItems = [
         { name: 'Overview', href: '/admin', icon: LayoutDashboard },
@@ -27,6 +35,7 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
         { name: 'Users', href: '/admin/users', icon: Shield },
         { name: 'Enquiries', href: '/admin/enquiries', icon: FileText },
         { name: 'Newsletter', href: '/admin/newsletter', icon: Mail },
+        { name: 'Security', href: '/admin/password', icon: LockIcon },
         { name: 'Content', href: '/admin/content', icon: FileText },
     ];
 
@@ -73,7 +82,10 @@ const AdminLayout = ({ children }: { children: React.ReactNode }) => {
                         </nav>
 
                         <div className="p-8 border-t border-white/5">
-                            <button className="flex items-center gap-4 text-gray-500 hover:text-red-500 transition-colors group">
+                            <button
+                                onClick={handleLogout}
+                                className="flex items-center gap-4 text-gray-500 hover:text-red-500 transition-colors group"
+                            >
                                 <LogOut size={20} />
                                 <span className="text-sm font-black uppercase tracking-widest">Logout</span>
                             </button>

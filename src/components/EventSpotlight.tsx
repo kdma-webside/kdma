@@ -121,27 +121,27 @@ const EventSpotlight = ({ event }: EventSpotlightProps) => {
                                 </span>
                             </div>
 
-                            <h2 className="text-white text-6xl lg:text-8xl font-black tracking-tighter leading-[0.85] uppercase mb-8 font-sans">
+                            <h2 className="text-white text-3xl md:text-6xl lg:text-8xl font-black tracking-tighter leading-tight md:leading-[0.85] uppercase mb-8 font-sans">
                                 {event.title.split(' ').slice(0, -1).join(' ')} <br />
                                 <span className="text-orange-600">{event.title.split(' ').slice(-1)}</span>
                             </h2>
 
-                            <p className="text-gray-400 text-lg lg:text-xl font-sans font-medium leading-relaxed max-w-xl italic">
+                            <p className="text-gray-400 text-sm md:text-lg lg:text-xl font-sans font-medium leading-relaxed max-w-xl italic">
                                 {event.description}
                             </p>
                         </div>
 
-                        <div className="grid grid-cols-2 gap-8 border-y border-white/5 py-10">
+                        <div className="grid grid-cols-1 sm:grid-cols-2 gap-8 border-y border-white/5 py-10">
                             <div className="space-y-2">
                                 <span className="text-white/40 text-[9px] font-black tracking-widest uppercase block">STADIUM</span>
-                                <div className="flex items-center gap-3 text-white text-xl font-black tracking-tight uppercase">
+                                <div className="flex items-center gap-3 text-white text-lg md:text-xl font-black tracking-tight uppercase">
                                     <MapPin size={18} className="text-orange-600" />
                                     {event.location}
                                 </div>
                             </div>
                             <div className="space-y-2">
                                 <span className="text-white/40 text-[9px] font-black tracking-widest uppercase block">ATTENDANCE</span>
-                                <div className="text-white text-xl font-black tracking-tight uppercase">
+                                <div className="text-white text-lg md:text-xl font-black tracking-tight uppercase">
                                     {event.id === 'state-2024' ? '5,000+ EXPECTED' : '2,000+ EXPECTED'}
                                 </div>
                             </div>
@@ -150,9 +150,9 @@ const EventSpotlight = ({ event }: EventSpotlightProps) => {
                         <div className="flex flex-col sm:flex-row items-center gap-8">
                             <button
                                 onClick={() => setIsRegisterOpen(true)}
-                                className="w-full sm:w-auto px-12 py-5 bg-orange-600 text-white rounded-2xl font-black tracking-widest text-xs uppercase hover:bg-orange-700 active:bg-orange-800 active:scale-95 transition-all flex items-center justify-center gap-4 group shadow-[0_20px_40px_-10px_rgba(234,88,12,0.4)]"
+                                className="w-full sm:w-auto px-8 md:px-12 py-5 bg-orange-600 text-white rounded-2xl font-black tracking-widest text-[10px] md:text-xs uppercase hover:bg-orange-700 active:bg-orange-800 active:scale-95 transition-all flex items-center justify-center gap-4 group shadow-[0_20px_40px_-10px_rgba(234,88,12,0.4)]"
                             >
-                                REGISTER FOR EVENT
+                                REGISTER NOW
                                 <ArrowRight size={18} className="group-hover:translate-x-1 group-active:translate-x-1 transition-transform" />
                             </button>
 

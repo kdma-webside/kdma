@@ -45,7 +45,7 @@ const EventsHero = ({ nextEvent }: { nextEvent?: any }) => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-white text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-[0.85] uppercase mb-12"
+                    className="text-white text-4xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-tight md:leading-[0.85] uppercase mb-12"
                 >
                     UPCOMING <br />
                     <span className="text-orange-600">CHALLENGES</span>
@@ -62,24 +62,24 @@ const EventsHero = ({ nextEvent }: { nextEvent?: any }) => {
                     </p>
 
                     {nextEvent ? (
-                        <div className="flex bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl items-center gap-6">
-                            <div className="text-center">
+                        <div className="flex flex-col sm:flex-row bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl items-center gap-6">
+                            <div className="text-center sm:text-left">
                                 <span className="block text-orange-500 text-3xl font-black">{daysRemaining}</span>
                                 <span className="text-[9px] text-white/40 font-black tracking-widest uppercase">DAYS REMAINING</span>
                             </div>
-                            <div className="w-px h-10 bg-white/10" />
-                            <div className="text-left">
+                            <div className="hidden sm:block w-px h-10 bg-white/10" />
+                            <div className="text-center sm:text-left">
                                 <span className="block text-white text-xs font-black tracking-widest uppercase">NEXT EVENT</span>
                                 <span className="block text-gray-400 text-[10px] font-bold uppercase">{nextEvent.title}</span>
                             </div>
                         </div>
                     ) : (
-                        <div className="flex bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl items-center gap-6">
-                            <div className="text-center">
+                        <div className="flex flex-col sm:flex-row bg-white/5 backdrop-blur-xl border border-white/10 p-6 rounded-2xl items-center gap-6">
+                            <div className="text-center sm:text-left">
                                 <span className="block text-white/20 text-3xl font-black">--</span>
                             </div>
-                            <div className="w-px h-10 bg-white/10" />
-                            <div className="text-left">
+                            <div className="hidden sm:block w-px h-10 bg-white/10" />
+                            <div className="text-center sm:text-left">
                                 <span className="block text-white text-xs font-black tracking-widest uppercase">NO UPCOMING EVENTS</span>
                                 <span className="block text-gray-400 text-[10px] font-bold uppercase">STAY TUNED</span>
                             </div>

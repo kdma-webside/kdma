@@ -9,13 +9,16 @@
     "lint": "eslint",
     "postinstall": "prisma generate"
   },
+  "prisma": {
+    "seed": "node prisma/seed.js"
+  },
   "dependencies": {
     "@libsql/client": "^0.17.0",
     "@prisma/adapter-libsql": "^7.3.0",
     "@prisma/client": "^7.3.0",
     "framer-motion": "^12.31.0",
     "lucide-react": "^0.563.0",
-    "next": "16.1.6",
+    "next": "15.1.6",
     "prisma": "^7.3.0",
     "react": "19.2.3",
     "react-dom": "19.2.3"
@@ -26,7 +29,7 @@
     "@types/react": "^19",
     "@types/react-dom": "^19",
     "eslint": "^9",
-    "eslint-config-next": "16.1.6",
+    "eslint-config-next": "15.1.6",
     "tailwindcss": "^4",
     "typescript": "^5"
   }

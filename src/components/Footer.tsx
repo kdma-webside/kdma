@@ -14,7 +14,7 @@ const Footer = () => {
     return (
         <footer className="relative bg-black overflow-hidden">
             {/* --- CTA Section --- */}
-            <section className="relative py-32 px-12 lg:px-24 border-t border-white/5 overflow-hidden group">
+            <section className="relative py-16 md:py-32 px-6 lg:px-24 border-t border-white/5 overflow-hidden group">
                 {/* Background Image/Texture with Spotlight */}
                 <div className="absolute inset-0 z-0">
                     <Image
