@@ -46,6 +46,8 @@ function timeAgo(date: Date) {
     return Math.floor(seconds) + " seconds ago";
 }
 
+export const dynamic = 'force-dynamic';
+
 const OverviewPage = async () => {
     const stats = await getDashboardStats();
 

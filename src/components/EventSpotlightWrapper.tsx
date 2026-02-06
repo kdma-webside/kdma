@@ -1,18 +1,17 @@
 'use client';
 
 import React, { useState, useMemo, useEffect } from 'react';
-import { useSearchParams } from 'next/navigation';
 import EventSpotlight from './EventSpotlight';
 import Events, { defaultEventsData } from './Events';
 import EventCalendar from './EventCalendar';
 
 interface EventSpotlightWrapperProps {
     events: any[];
+    initialId?: string;
 }
 
-const EventSpotlightWrapper = ({ events }: EventSpotlightWrapperProps) => {
-    const searchParams = useSearchParams();
-    const eventIdFromUrl = searchParams.get('id');
+const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps) => {
+    const eventIdFromUrl = initialId;
 
     const now = new Date();
     // Sort events by date ascending, handling cases where eventDate might be missing (for demo data)

@@ -1,17 +1,24 @@
 'use server';
 
 import prisma from '@/lib/db';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_noStore } from 'next/cache';
 
 export async function getEvents() {
-    const events = await prisma.event.findMany();
+    unstable_noStore();
+    try {
+        const events = await prisma.event.findMany();
+        if (!events) return [];
 
-    // Sort manually in JS
-    return events.sort((a: any, b: any) => {
-        const dateA = a.eventDate ? new Date(a.eventDate).getTime() : 0;
-        const dateB = b.eventDate ? new Date(b.eventDate).getTime() : 0;
-        return dateA - dateB;
-    });
+        // Sort manually in JS
+        return events.sort((a: any, b: any) => {
+            const dateA = a.eventDate ? new Date(a.eventDate).getTime() : 0;
+            const dateB = b.eventDate ? new Date(b.eventDate).getTime() : 0;
+            return dateA - dateB;
+        });
+    } catch (error) {
+        console.error("Error fetching events during build:", error);
+        return [];
+    }
 }
 
 export async function getEventById(id: string) {

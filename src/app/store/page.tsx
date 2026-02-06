@@ -6,6 +6,8 @@ import ScrollToTop from '@/components/ScrollToTop';
 import { getProducts } from '@/app/actions/store';
 import { getContent } from '@/app/actions/content';
 
+export const dynamic = 'force-dynamic';
+
 export default async function StorePage() {
     const [products, storeContent] = await Promise.all([
         getProducts(),

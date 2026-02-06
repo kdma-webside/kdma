@@ -1,12 +1,18 @@
 'use server';
 
 import prisma from '@/lib/db';
-import { revalidatePath } from 'next/cache';
+import { revalidatePath, unstable_noStore } from 'next/cache';
 
 export async function getProducts() {
-    return await prisma.product.findMany({
-        orderBy: { createdAt: 'desc' }
-    });
+    unstable_noStore();
+    try {
+        return await prisma.product.findMany({
+            orderBy: { createdAt: 'desc' }
+        });
+    } catch (error) {
+        console.error("Error fetching products during build:", error);
+        return [];
+    }
 }
 
 export async function updateProduct(id: string, data: any) {
