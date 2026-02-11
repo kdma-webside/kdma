@@ -19,8 +19,8 @@ const ContentManagement = () => {
         if (data.length === 0) {
             // Initial Seed for content if empty
             const initial = [
-                { key: 'hero.headline', value: 'MASTER THE GRAVITY OF ANCIENT WARRIORS', area: 'Hero', type: 'text' },
-                { key: 'hero.subheadline', value: 'ENTER THE ARENA OF POWER AND GRACE', area: 'Hero', type: 'text' },
+                { key: 'hero.headline', value: 'BEST MALLAKHAMB ACADEMY IN TAMIL NADU', area: 'Hero', type: 'text' },
+                { key: 'hero.subheadline', value: 'THE PREMIER SCHOOL FOR ANCIENT SPORTS, ESPECIALLY IN KANYAKUMARI DISTRICT', area: 'Hero', type: 'text' },
                 { key: 'about.title', value: 'A LEGACY ETCHED IN TEAK AND VALOR', area: 'About', type: 'text' },
                 { key: 'store.hero_title', value: 'GET THE GEAR OF MODERN GLADIATORS', area: 'Store', type: 'text' },
             ];
