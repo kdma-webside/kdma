@@ -33,10 +33,11 @@ const AboutHero = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-white text-4xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-none uppercase mb-12"
+                    style={{ fontSize: '24px' }}
+                    className="text-white font-black font-sans tracking-tighter leading-none uppercase mb-12"
                 >
                     THE HEART OF <br />
-                    <span className="text-orange-600">TRADITION</span>
+                    <span className="text-orange-600">TRADITION V2</span>
                 </motion.h1>
 
                 <motion.p
