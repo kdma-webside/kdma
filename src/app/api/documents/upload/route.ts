@@ -58,10 +58,14 @@ export async function POST(request: NextRequest) {
             fileSize: file.size,
             fileType: file.type,
         });
-    } catch (error) {
-        console.error('Upload error:', error);
+    } catch (error: any) {
+        console.error('Upload Error Details:', {
+            message: error.message,
+            stack: error.stack,
+            error
+        });
         return NextResponse.json(
-            { error: 'Failed to upload file' },
+            { error: `Upload failed: ${error.message || 'Unknown error'}` },
             { status: 500 }
         );
     }
