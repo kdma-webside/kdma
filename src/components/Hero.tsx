@@ -110,7 +110,7 @@ const Hero = ({
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
                 >
-                    <h1 className="text-white text-3xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-[0.95] md:leading-[0.85] uppercase mb-12 text-center lg:text-left">
+                    <h1 className="text-white text-3xl sm:text-4xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-[0.95] md:leading-[0.85] uppercase mb-12 text-center lg:text-left">
                         {headline.split(' ').slice(0, -1).join(' ')} <br />
                         <span className="text-orange-600">{headline.split(' ').slice(-1)}</span>
                     </h1>
