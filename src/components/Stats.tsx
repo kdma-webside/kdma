@@ -87,7 +87,7 @@ const Stats = () => {
                         className="flex flex-col items-center"
                     >
                         <span className="text-orange-300 text-xs tracking-[0.6em] font-black uppercase mb-4 transition-all group-hover:tracking-[1em] duration-500">NUMBERS THAT SPEAK</span>
-                        <h2 className="text-white text-5xl lg:text-8xl font-black tracking-tighter uppercase leading-none font-sans transition-all group-hover:scale-[1.02]">
+                        <h2 className="text-white text-4xl lg:text-8xl font-black tracking-tighter uppercase leading-none font-sans transition-all group-hover:scale-[1.02]">
                             The Power of <br />
                             <span className="text-orange-500 group-hover:text-orange-400 transition-all">Impact</span>
                         </h2>

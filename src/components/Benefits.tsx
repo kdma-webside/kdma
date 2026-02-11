@@ -106,7 +106,7 @@ const Benefits = () => {
                         whileInView={{ opacity: 1, scale: 1 }}
                         viewport={{ once: true }}
                         transition={{ duration: 1 }}
-                        className="text-white text-6xl lg:text-9xl font-black tracking-tighter uppercase leading-none font-sans"
+                        className="text-white text-4xl lg:text-9xl font-black tracking-tighter uppercase leading-none font-sans"
                     >
                         What Mallakhamb <br /> <span className="text-orange-600">Builds</span> In You
                     </motion.h2>

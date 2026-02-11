@@ -45,7 +45,7 @@ const EventsHero = ({ nextEvent }: { nextEvent?: any }) => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-white text-4xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-tight md:leading-[0.85] uppercase mb-12"
+                    className="text-white text-3xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-tight md:leading-[0.85] uppercase mb-12"
                 >
                     UPCOMING <br />
                     <span className="text-orange-600">CHALLENGES</span>

@@ -37,7 +37,7 @@ const GalleryHero = () => {
                     initial={{ opacity: 0, y: 30 }}
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ duration: 0.8 }}
-                    className="text-white text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-none uppercase mb-8"
+                    className="text-white text-4xl md:text-7xl lg:text-9xl font-black font-sans tracking-tighter leading-none uppercase mb-8"
                 >
                     THE <span className="text-orange-600">GALLERY</span>
                 </motion.h1>
