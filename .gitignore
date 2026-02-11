@@ -41,3 +41,14 @@ yarn-error.log*
 next-env.d.ts
 
 /src/generated/prisma
+
+# Large files and logs
+search_results.txt
+search_results_src.txt
+*.log
+*.db
+temp_events.html
+build_output.log
+build_error.txt
+build_error_webpack.log
+lint_output.txt
