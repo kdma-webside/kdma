@@ -45,8 +45,8 @@ const FireParticles = () => {
 };
 
 const Hero = ({
-    headline = "MASTER THE GRAVITY OF ANCIENT WARRIORS",
-    subheadline = "ENTER THE ARENA OF POWER AND GRACE",
+    headline = "BEST MALLAKHAMB ACADEMY IN TAMIL NADU",
+    subheadline = "THE PREMIER SCHOOL FOR ANCIENT SPORTS, ESPECIALLY IN KANYAKUMARI DISTRICT",
     upcomingEvent
 }: {
     headline?: string;

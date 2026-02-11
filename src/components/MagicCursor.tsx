@@ -46,10 +46,17 @@ export default function MagicCursor() {
     if (!isMounted) return null;
 
     return (
-        <div className="fixed inset-0 pointer-events-none z-[9999]">
+        <div className="fixed inset-0 pointer-events-none z-[999999]">
             {/* Hidden cursor style on ALL elements */}
             <style jsx global>{`
-                body, a, button, [role="button"], input, select, textarea, * {
+                * {
+                    cursor: none !important;
+                }
+                body, a, button, [role="button"], input, select, textarea {
+                    cursor: none !important;
+                }
+                /* Ensure custom components inside portals also have no cursor */
+                [data-radix-portal], .radix-portal, .toaster, [role="status"], [role="alert"] {
                     cursor: none !important;
                 }
             `}</style>
