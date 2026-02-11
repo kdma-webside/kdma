@@ -27,7 +27,7 @@ const TrainingsHero = () => {
                         initial={{ opacity: 0, y: 20 }}
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.8, delay: 0.1 }}
-                        className="text-white text-4xl lg:text-8xl font-black tracking-tighter leading-[0.9] uppercase mb-8"
+                        className="text-white text-3xl md:text-5xl lg:text-8xl font-black tracking-tighter leading-[0.9] uppercase mb-8"
                     >
                         Forge Your <br />
                         <span className="text-orange-600">Legacy</span>

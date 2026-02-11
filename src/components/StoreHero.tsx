@@ -36,7 +36,7 @@ const StoreHero = ({ title = "FORGE YOUR STRENGTH" }: { title?: string }) => {
                         <Sparkles size={20} className="text-orange-500" />
                     </div>
 
-                    <h1 className="text-white text-4xl md:text-7xl lg:text-9xl font-black tracking-tighter leading-none uppercase mb-8">
+                    <h1 className="text-white text-3xl md:text-7xl lg:text-9xl font-black tracking-tighter leading-none uppercase mb-8">
                         {title.split(' ').slice(0, -1).join(' ')} <br />
                         <span className="text-orange-600">{title.split(' ').slice(-1)}</span>
                     </h1>
