@@ -1,0 +1,48 @@
+const { createClient } = require('@libsql/client');
+require('dotenv').config();
+
+async function main() {
+    console.log('--- Seeding Specific Committee Dummy Data ---');
+    const url = process.env.DATABASE_URL;
+    const authToken = process.env.TURSO_AUTH_TOKEN;
+
+    if (!url) {
+        console.error('DATABASE_URL is missing!');
+        return;
+    }
+
+    const client = createClient({ url, authToken });
+
+    const members = [
+        { name: "John Doe", position: "President", image: "/images/heritage-master.png", category: "President", order: 10 },
+        { name: "Jane Smith", position: "Vice President", image: "/images/unified-hero-athlete.png", category: "Vice president", order: 20 },
+        { name: "Peter Parker", position: "Secretary", image: "/images/benefit-discipline.jpg", category: "Secretary", order: 30 },
+        { name: "Mary Jane", position: "Joint Secretary", image: "/images/athlete-hero.png", category: "Joint secretary", order: 40 },
+        { name: "Steve Rogers", position: "Coordinator", image: "/images/hero-athlete.jpg", category: "Cordinator", order: 50 },
+        { name: "Tony Stark", position: "Treasurer", image: "/images/benefit-strength.jpg", category: "Tressurer", order: 60 },
+        { name: "Bruce Banner", position: "Executive Member", image: "/images/stats-bg.png", category: "Executive comittee", order: 70 },
+        { name: "Natasha Romanoff", position: "Executive Member", image: "/images/benefit-flexibility.png", category: "Executive comittee", order: 80 },
+    ];
+
+    try {
+        console.log('Clearing existing committee members...');
+        await client.execute('DELETE FROM "CommitteeMember"');
+
+        for (const member of members) {
+            const id = `dummy_${Math.random().toString(36).substr(2, 9)}`;
+            const now = new Date().toISOString();
+
+            console.log(`Adding ${member.category}: ${member.name}...`);
+            await client.execute({
+                sql: `INSERT INTO "CommitteeMember" (id, name, position, image, category, "order", createdAt, updatedAt) 
+                      VALUES (?, ?, ?, ?, ?, ?, ?, ?)`,
+                args: [id, member.name, member.position, member.image, member.category, member.order, now, now]
+            });
+        }
+        console.log('Successfully seeded dummy committee data.');
+    } catch (error) {
+        console.error('Error seeding data:', error.message);
+    }
+}
+
+main();

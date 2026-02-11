@@ -1,0 +1,229 @@
+generator client {
+  provider        = "prisma-client-js"
+  previewFeatures = ["driverAdapters"]
+}
+
+datasource db {
+  provider = "sqlite"
+}
+
+model Admin {
+  id        String   @id @default(cuid())
+  username  String   @unique
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Product {
+  id          String      @id @default(cuid())
+  name        String
+  price       Float
+  description String
+  image       String
+  category    String
+  rating      Float       @default(5.0)
+  isFeatured  Boolean     @default(false)
+  createdAt   DateTime    @default(now())
+  updatedAt   DateTime    @updatedAt
+  orderItems  OrderItem[]
+}
+
+model Order {
+  id            String      @id @default(cuid())
+  customerName  String
+  customerEmail String
+  customerPhone String?
+  address       String
+  totalAmount   Float
+  status        String      @default("pending")
+  createdAt     DateTime    @default(now())
+  updatedAt     DateTime    @updatedAt
+  items         OrderItem[]
+}
+
+model OrderItem {
+  id        String  @id @default(cuid())
+  orderId   String
+  productId String
+  quantity  Int
+  price     Float
+  product   Product @relation(fields: [productId], references: [id])
+  order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
+model Event {
+  id            String              @id @default(cuid())
+  title         String
+  description   String
+  eventDate     DateTime            @default(now())
+  endDate       DateTime?
+  month         String
+  day           String
+  location      String
+  status        String              @default("upcoming")
+  image         String
+  createdAt     DateTime            @default(now())
+  updatedAt     DateTime            @updatedAt
+  formConfig    String?
+  registrations EventRegistration[]
+}
+
+model EventRegistration {
+  id        String   @id @default(cuid())
+  eventId   String
+  userName  String
+  userEmail String
+  userPhone String
+  responses String
+  status    String   @default("registered")
+  createdAt DateTime @default(now())
+  event     Event    @relation(fields: [eventId], references: [id], onDelete: Cascade)
+}
+
+model User {
+  id        String   @id @default(cuid())
+  name      String
+  email     String   @unique
+  phone     String
+  password  String
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Enquiry {
+  id        String   @id @default(cuid())
+  name      String
+  email     String
+  phone     String
+  interest  String
+  status    String   @default("new")
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model SiteContent {
+  id        String   @id @default(cuid())
+  key       String   @unique
+  value     String
+  type      String   @default("text")
+  area      String
+  updatedAt DateTime @updatedAt
+}
+
+model OtpVerification {
+  id         String    @id @default(cuid())
+  phone      String    @unique
+  code       String
+  expiresAt  DateTime
+  verifiedAt DateTime?
+  createdAt  DateTime  @default(now())
+}
+
+model PasswordReset {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  token     String   @unique
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+}
+
+model NewsletterSubscriber {
+  id        String   @id @default(cuid())
+  email     String   @unique
+  createdAt DateTime @default(now())
+}
+
+model NewsletterContent {
+  id        String    @id @default(cuid())
+  subject   String
+  content   String
+  status    String    @default("draft")
+  sentAt    DateTime?
+  createdAt DateTime  @default(now())
+  updatedAt DateTime  @updatedAt
+}
+
+model Training {
+  id            String                 @id @default(cuid())
+  title         String
+  description   String
+  duration      String?                // Optional: e.g., "3 Months", "6 Weeks"
+  startDate     DateTime?
+  endDate       DateTime?
+  level         String                 // e.g., "Beginner", "Advanced"
+  image         String
+  category      String                 // e.g., "Traditional", "Modern"
+  isActive      Boolean                @default(true)
+  createdAt     DateTime               @default(now())
+  updatedAt     DateTime               @updatedAt
+  formConfig    String?
+  registrations TrainingRegistration[]
+}
+
+model Camp {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  startDate   DateTime
+  endDate     DateTime
+  location    String
+  image       String
+  price       Float
+  isActive    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+  formConfig  String?
+  registrations CampRegistration[]
+}
+
+model TrainingRegistration {
+  id        String   @id @default(cuid())
+  trainingId String
+  training  Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
+  userName  String
+  userEmail String
+  userPhone String
+  responses String // JSON string
+  status    String   @default("registered")
+  createdAt DateTime @default(now())
+}
+
+model CampRegistration {
+  id        String   @id @default(cuid())
+  campId    String
+  camp      Camp     @relation(fields: [campId], references: [id], onDelete: Cascade)
+  userName  String
+  userEmail String
+  userPhone String
+  responses String // JSON string
+  status    String   @default("registered")
+  createdAt DateTime @default(now())
+}
+
+model CommitteeMember {
+  id          String   @id @default(cuid())
+  name        String
+  position    String
+  image       String
+  description String?
+  category    String   // e.g., "LEADERSHIP", "CORE TEAM", "EXECUTIVE COUNCIL", "OPERATIONS"
+  order       Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model Document {
+  id          String   @id @default(cuid())
+  title       String
+  description String?
+  fileName    String
+  filePath    String
+  category    String   // e.g., "REGISTRATION", "LETTERPAD", "RULES", "CERTIFICATES", "GENERAL"
+  fileSize    Int      // in bytes
+  fileType    String   // e.g., "application/pdf", "image/png"
+  isPublic    Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+

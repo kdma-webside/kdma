@@ -1,0 +1,54 @@
+{
+  "compilerOptions": {
+    "target": "ES2017",
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "strict": true,
+    "noEmit": true,
+    "esModuleInterop": true,
+    "module": "esnext",
+    "moduleResolution": "bundler",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "jsx": "react-jsx",
+    "incremental": true,
+    "plugins": [
+      {
+        "name": "next"
+      }
+    ],
+    "paths": {
+      "@/*": [
+        "./src/*"
+      ]
+    }
+  },
+  "include": [
+    "next-env.d.ts",
+    "**/*.ts",
+    "**/*.tsx",
+    ".next/types/**/*.ts",
+    ".next/dev/types/**/*.ts",
+    "**/*.mts",
+    ".next_clean/types/**/*.ts",
+    ".next_clean/dev/types/**/*.ts",
+    ".build_web/types/**/*.ts",
+    ".build_web/dev/types/**/*.ts",
+    ".next_new/types/**/*.ts",
+    ".next_new/dev/types/**/*.ts",
+    ".next_stable/types/**/*.ts",
+    ".next_stable/dev/types/**/*.ts",
+    ".next_stable_final/types/**/*.ts",
+    ".next_stable_final/dev/types/**/*.ts",
+    ".next_mallarkambam/types/**/*.ts",
+    ".next_mallarkambam/dev/types/**/*.ts"
+  ],
+  "exclude": [
+    "node_modules"
+  ]
+}
