@@ -73,7 +73,7 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document }) => {
                         {formatFileSize(document.fileSize)}
                     </span>
                     <a
-                        href={`/${document.filePath}`}
+                        href={document.filePath.startsWith('http') ? document.filePath : `/${document.filePath}`}
                         download={document.fileName}
                         className="flex items-center gap-2 bg-orange-600 hover:bg-orange-700 active:bg-orange-800 text-white px-6 py-3 rounded-xl font-black text-xs uppercase tracking-widest transition-all duration-300 active:scale-95"
                         onClick={(e) => e.stopPropagation()}
@@ -118,18 +118,18 @@ const DocumentCard: React.FC<DocumentCardProps> = ({ document }) => {
                         <div className="relative flex-grow rounded-2xl overflow-hidden border border-white/10 bg-white/5 min-h-[500px]">
                             {isImage ? (
                                 <img
-                                    src={`/${document.filePath}`}
+                                    src={document.filePath.startsWith('http') ? document.filePath : `/${document.filePath}`}
                                     alt={document.title}
                                     className="w-full h-full object-contain"
                                 />
                             ) : document.fileType === 'application/pdf' ? (
                                 <object
-                                    data={`/${document.filePath}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+                                    data={`${document.filePath.startsWith('http') ? document.filePath : `/${document.filePath}`}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
                                     type="application/pdf"
                                     className="absolute inset-0 w-full h-full border-none bg-white"
                                 >
                                     <iframe
-                                        src={`/${document.filePath}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
+                                        src={`${document.filePath.startsWith('http') ? document.filePath : `/${document.filePath}`}#view=FitH&toolbar=0&navpanes=0&scrollbar=0`}
                                         className="w-full h-full border-none bg-white"
                                         title={document.title}
                                     />

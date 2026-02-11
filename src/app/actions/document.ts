@@ -124,6 +124,8 @@ export async function updateDocument(
     return document;
 }
 
+import { del } from '@vercel/blob';
+
 /**
  * Delete a document and its file
  */
@@ -137,12 +139,22 @@ export async function deleteDocument(id: string): Promise<void> {
     }
 
     // Delete the physical file
-    const filePath = path.join(process.cwd(), 'public', document.filePath);
-    try {
-        await fs.unlink(filePath);
-    } catch (error) {
-        console.error('Error deleting file:', error);
-        // Continue even if file deletion fails
+    if (document.filePath.startsWith('http')) {
+        // Vercel Blob deletion
+        try {
+            await del(document.filePath);
+        } catch (error) {
+            console.error('Error deleting blob file:', error);
+        }
+    } else {
+        // Local file deletion fallback
+        const filePath = path.join(process.cwd(), 'public', document.filePath);
+        try {
+            await fs.unlink(filePath);
+        } catch (error) {
+            console.error('Error deleting local file:', error);
+            // Continue even if file deletion fails
+        }
     }
 
     // Delete from database

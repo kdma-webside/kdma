@@ -1,7 +1,5 @@
 import { NextRequest, NextResponse } from 'next/server';
-import { writeFile, mkdir } from 'fs/promises';
-import path from 'path';
-import { existsSync } from 'fs';
+import { put } from '@vercel/blob';
 
 const ALLOWED_FILE_TYPES = [
     'application/pdf',
@@ -46,30 +44,17 @@ export async function POST(request: NextRequest) {
         // Generate unique filename
         const timestamp = Date.now();
         const originalName = file.name.replace(/[^a-zA-Z0-9.-]/g, '_');
-        const fileName = `${timestamp}_${originalName}`;
+        const fileName = `documents/${category.toLowerCase()}/${timestamp}_${originalName}`;
 
-        // Determine save path based on category
-        const categoryFolder = category.toLowerCase();
-        const savePath = path.join(process.cwd(), 'public', 'documents', categoryFolder);
-        const filePath = path.join(savePath, fileName);
-
-        // Create directory if it doesn't exist
-        if (!existsSync(savePath)) {
-            await mkdir(savePath, { recursive: true });
-        }
-
-        // Convert file to buffer and save
-        const bytes = await file.arrayBuffer();
-        const buffer = Buffer.from(bytes);
-        await writeFile(filePath, buffer);
-
-        // Return file info
-        const publicPath = `documents/${categoryFolder}/${fileName}`;
+        // Upload to Vercel Blob
+        const blob = await put(fileName, file, {
+            access: 'public',
+        });
 
         return NextResponse.json({
             success: true,
             fileName: originalName,
-            filePath: publicPath,
+            filePath: blob.url, // Store the full Blob URL
             fileSize: file.size,
             fileType: file.type,
         });

@@ -246,7 +246,7 @@ const DocumentsAdminPage = () => {
                                             <td className="px-8 py-6">
                                                 <div className="flex items-center gap-2">
                                                     <a
-                                                        href={`/${doc.filePath}`}
+                                                        href={doc.filePath.startsWith('http') ? doc.filePath : `/${doc.filePath}`}
                                                         download={doc.fileName}
                                                         className="p-2 hover:bg-white/10 rounded-lg transition-colors group"
                                                         title="Download"
