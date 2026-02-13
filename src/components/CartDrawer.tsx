@@ -2,10 +2,11 @@
 
 import React, { useEffect } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
-import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight } from 'lucide-react';
+import { X, Minus, Plus, ShoppingBag, Trash2, ArrowRight, LogIn } from 'lucide-react';
 import { useCart } from '@/context/CartContext';
 import UpiPaymentModal from '@/components/UpiPaymentModal';
 import Image from 'next/image';
+import { useRouter } from 'next/navigation';
 
 const CartDrawer = () => {
     const {
@@ -62,9 +63,35 @@ const CartDrawer = () => {
     });
     const [isCheckingOut, setIsCheckingOut] = React.useState(false);
     const [showUpiModal, setShowUpiModal] = React.useState(false);
+    const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);
+    const router = useRouter();
+
+    // Check authentication status on mount
+    useEffect(() => {
+        const checkAuth = async () => {
+            try {
+                const { getCurrentSession } = await import('@/app/actions/users');
+                const session = await getCurrentSession();
+                setIsAuthenticated(!!session);
+            } catch (error) {
+                setIsAuthenticated(false);
+            }
+        };
+        checkAuth();
+    }, []);
 
     const handleCheckout = async () => {
         if (cartItems.length === 0) return;
+
+        // Check if user is authenticated
+        if (isAuthenticated === false) {
+            // Show sign-in prompt
+            const shouldSignIn = confirm('You must be signed in to purchase from our store. Would you like to sign in now?');
+            if (shouldSignIn) {
+                router.push('/sign-in');
+            }
+            return;
+        }
 
         if (!checkoutDetails.name) {
             nameRef.current?.focus();
@@ -294,13 +321,27 @@ const CartDrawer = () => {
                                     </div>
                                 </div>
 
+                                {isAuthenticated === false && (
+                                    <div className="bg-orange-500/10 border border-orange-500/30 rounded-xl p-4 mb-4">
+                                        <div className="flex items-start gap-3">
+                                            <LogIn className="text-orange-500 flex-shrink-0 mt-0.5" size={20} />
+                                            <div>
+                                                <p className="text-orange-400 font-semibold text-sm mb-1">Sign In Required</p>
+                                                <p className="text-neutral-400 text-xs">
+                                                    You must be registered and signed in to purchase from our store.
+                                                </p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                )}
+
                                 <button
                                     onClick={handleCheckout}
-                                    disabled={isCheckingOut}
+                                    disabled={isCheckingOut || isAuthenticated === null}
                                     className="w-full bg-orange-600 text-white p-5 rounded-2xl font-black tracking-widest text-xs uppercase hover:bg-orange-700 transition-all flex items-center justify-center gap-4 group shadow-[0_20px_40px_-10px_rgba(234,88,12,0.4)] disabled:opacity-50 disabled:cursor-not-allowed"
                                 >
-                                    {isCheckingOut ? 'Initiating...' : 'Finalize Recruitment'}
-                                    <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />
+                                    {isCheckingOut ? 'Initiating...' : (isAuthenticated === false ? 'Sign In to Purchase' : 'Finalize Recruitment')}
+                                    {isAuthenticated === false ? <LogIn size={18} /> : <ArrowRight size={18} className="group-hover:translate-x-1 transition-transform" />}
                                 </button>
 
                                 <p className="text-center text-[8px] text-white/20 font-black tracking-[0.3em] uppercase">
