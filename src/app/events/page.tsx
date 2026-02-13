@@ -17,12 +17,13 @@ export default async function EventsPage({
     unstable_noStore();
     const { id: eventId } = await searchParams;
     const events = await getEvents();
+    const upcomingEvents = events.filter(e => e.status === 'upcoming');
 
     return (
         <main className="relative min-h-screen bg-black overflow-x-hidden">
             <Suspense fallback={<div className="h-20 bg-black" />}>
                 <Navbar />
-                <EventsHero nextEvent={events[0]} />
+                <EventsHero nextEvent={upcomingEvents[0] || events[0]} />
                 <EventSpotlightWrapper events={events} initialId={eventId as string} />
                 <Footer />
                 <ScrollToTop />

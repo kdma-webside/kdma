@@ -55,12 +55,14 @@ export default function UpiPaymentModal({
 
                         {/* QR Code Section */}
                         {qrCodeUrl && (
-                            <div className="bg-white rounded-xl p-6 mb-6 flex justify-center">
-                                <img
-                                    src={qrCodeUrl}
-                                    alt="UPI QR Code"
-                                    className="w-64 h-64 object-contain"
-                                />
+                            <div className="bg-white rounded-xl p-4 mb-6 flex justify-center">
+                                <div className="w-64 h-64 overflow-hidden relative rounded-lg border border-neutral-100">
+                                    <img
+                                        src={qrCodeUrl}
+                                        alt="UPI QR Code"
+                                        className="absolute inset-0 w-full h-full object-cover scale-[1.4] origin-center"
+                                    />
+                                </div>
                             </div>
                         )}
 
@@ -137,10 +139,10 @@ export default function UpiPaymentModal({
                                 Customer Care
                             </h3>
                             <a
-                                href="tel:+919876543210"
+                                href="tel:+917708244424"
                                 className="text-orange-400 text-2xl font-bold hover:text-orange-300 transition"
                             >
-                                +91 98765 43210
+                                +91 77082 44424
                             </a>
                             <p className="text-xs text-neutral-500 mt-2">
                                 Available Mon-Sat, 9 AM - 6 PM

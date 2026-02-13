@@ -1,0 +1,48 @@
+{
+  "Admin": [],
+  "Product": [],
+  "SiteContent": [],
+  "Order": [],
+  "OrderItem": [],
+  "EventRegistration": [],
+  "User": [],
+  "Enquiry": [],
+  "OtpVerification": [],
+  "PasswordReset": [],
+  "NewsletterSubscriber": [],
+  "NewsletterContent": [],
+  "Event": [],
+  "Training": [],
+  "Camp": [],
+  "TrainingRegistration": [],
+  "CampRegistration": [],
+  "CommitteeMember": [],
+  "Document": [
+    {
+      "id": "cmlhiis370001m865ou51kcj8",
+      "title": "Letter pad",
+      "description": "Tamil",
+      "fileName": "WhatsApp_Image_2026-02-10_at_8.22.18_PM.jpeg",
+      "filePath": "documents/letterpad/1770783073433_WhatsApp_Image_2026-02-10_at_8.22.18_PM.jpeg",
+      "category": "LETTERPAD",
+      "fileSize": 221747,
+      "fileType": "image/jpeg",
+      "isPublic": 1,
+      "createdAt": "2026-02-11T04:11:13.459+00:00",
+      "updatedAt": "2026-02-11T04:11:13.459+00:00"
+    },
+    {
+      "id": "cmlhis72l0000os65esw5yq29",
+      "title": "Registration",
+      "description": "Kanyakumari District Mallkhambh Association",
+      "fileName": "mallar__1_.pdf",
+      "filePath": "documents/registration/1770783512752_mallar__1_.pdf",
+      "category": "REGISTRATION",
+      "fileSize": 94548,
+      "fileType": "application/pdf",
+      "isPublic": 1,
+      "createdAt": "2026-02-11T04:18:32.781+00:00",
+      "updatedAt": "2026-02-11T04:18:32.781+00:00"
+    }
+  ]
+}

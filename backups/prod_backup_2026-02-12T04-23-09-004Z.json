@@ -1,0 +1,538 @@
+{
+  "SiteContent": [
+    {
+      "id": "cmlaheqh4000004jyx31y50ne",
+      "key": "hero.headline",
+      "value": "BEST MALLAKHAMB ACADEMY IN TAMIL NADU",
+      "type": "text",
+      "area": "Hero",
+      "updatedAt": "2026-02-11 06:10:23"
+    },
+    {
+      "id": "cmlaher3g000104jyyybx4smg",
+      "key": "hero.subheadline",
+      "value": "THE PREMIER SCHOOL FOR ANCIENT SPORTS, ESPECIALLY IN KANYAKUMARI DISTRICT",
+      "type": "text",
+      "area": "Hero",
+      "updatedAt": "2026-02-11 06:10:24"
+    },
+    {
+      "id": "cmlaherp3000204jylujy0b7v",
+      "key": "about.title",
+      "value": "A LEGACY ETCHED IN TEAK AND VALOR",
+      "type": "text",
+      "area": "About",
+      "updatedAt": "2026-02-06T06:05:43.289+00:00"
+    },
+    {
+      "id": "cmlahesal000304jyt6c476u1",
+      "key": "store.hero_title",
+      "value": "EQUIP YOUR ARMORY",
+      "type": "text",
+      "area": "Store",
+      "updatedAt": "2026-02-06T06:29:07.113+00:00"
+    }
+  ],
+  "Product": [
+    {
+      "id": "cmlai8uwi0000r865gj3ec376",
+      "name": "Standard Wooden Pole",
+      "price": 18500,
+      "description": "Authentic teak wood Mallakhamb pole, hand-polished and oil-treated for elite grip and durability.",
+      "image": "/images/unified-hero-athlete.png",
+      "category": "Equipment",
+      "rating": 4.9,
+      "isFeatured": 1,
+      "createdAt": "2026-02-06T06:29:07.314+00:00",
+      "updatedAt": "2026-02-06T06:29:07.314+00:00"
+    },
+    {
+      "id": "cmlai8v260001r865zep92605",
+      "name": "Warrior Training Rope",
+      "price": 8400,
+      "description": "100% organic cotton rope with reinforced core. Designed for maximum friction and minimal burn.",
+      "image": "/images/benefit-discipline.jpg",
+      "category": "Equipment",
+      "rating": 4.8,
+      "isFeatured": 0,
+      "createdAt": "2026-02-06T06:29:07.518+00:00",
+      "updatedAt": "2026-02-06T06:29:07.518+00:00"
+    },
+    {
+      "id": "cmlai8vay0002r865hez3p0bs",
+      "name": "Professional Cane Pole",
+      "price": 22000,
+      "description": "Premium cane Mallakhamb pole for advanced practitioners. Superior flexibility and weight distribution.",
+      "image": "/images/heritage-master.png",
+      "category": "Equipment",
+      "rating": 5,
+      "isFeatured": 1,
+      "createdAt": "2026-02-06T06:29:07.834+00:00",
+      "updatedAt": "2026-02-06T06:29:07.834+00:00"
+    },
+    {
+      "id": "cmlai8vjn0003r865dijfv5wg",
+      "name": "Traditional Grip Oil",
+      "price": 1200,
+      "description": "Specialized formulation of mustard oil and herbs to maintain pole texture and warrior grip.",
+      "image": "/images/training-ground.png",
+      "category": "Accessories",
+      "rating": 4.7,
+      "isFeatured": 0,
+      "createdAt": "2026-02-06T06:29:08.146+00:00",
+      "updatedAt": "2026-02-06T06:29:08.146+00:00"
+    }
+  ],
+  "Event": [
+    {
+      "id": "cmlai8w080004r865ngw5mvrn",
+      "title": "Annual State Championship",
+      "description": "A prestigious competition featuring the nation's top Mallakhamb athletes displaying raw power and calculated grace.",
+      "eventDate": "2026-10-15T00:00:00.000+00:00",
+      "month": "Oct",
+      "day": "15",
+      "location": "Main Stadium",
+      "status": "upcoming",
+      "image": "/images/unified-hero-athlete.png",
+      "createdAt": "2026-02-06T06:29:08.744+00:00",
+      "updatedAt": "2026-02-06T06:29:08.744+00:00",
+      "formConfig": null,
+      "endDate": null
+    },
+    {
+      "id": "cmlai8x5q0005r865w71fgobr",
+      "title": "Cultural Heritage Demo",
+      "description": "An open showcase at the City Square dedicated to preserving the 12th-century martial heritage through live performance.",
+      "eventDate": "2026-11-02T00:00:00.000+00:00",
+      "month": "Nov",
+      "day": "02",
+      "location": "City Square",
+      "status": "upcoming",
+      "image": "/images/heritage-master.png",
+      "createdAt": "2026-02-06T06:29:10.238+00:00",
+      "updatedAt": "2026-02-06T06:29:10.238+00:00",
+      "formConfig": null,
+      "endDate": null
+    },
+    {
+      "id": "cmlai8y4u0006r865k376ht0t",
+      "title": "International Workshop",
+      "description": "Global training session with visiting practitioners focused on the blending of traditional techniques with modern agility.",
+      "eventDate": "2026-04-23T00:00:00.000+00:00",
+      "month": "APR",
+      "day": "23",
+      "location": "Academy Grounds",
+      "status": "upcoming",
+      "image": "/images/benefit-discipline.jpg",
+      "createdAt": "2026-02-06T06:29:11.502+00:00",
+      "updatedAt": "2026-02-06T06:29:11.502+00:00",
+      "formConfig": null,
+      "endDate": null
+    }
+  ],
+  "NewsletterContent": [],
+  "Enquiry": [
+    {
+      "id": "cmlbuir38000004leohz80fyn",
+      "name": "anidha",
+      "email": "anidhaani2002@gmail.com",
+      "phone": "8148050481",
+      "interest": "Heritage",
+      "status": "enrolled",
+      "createdAt": "2026-02-07T05:00:30.500+00:00",
+      "updatedAt": "2026-02-07T05:01:52.561+00:00"
+    }
+  ],
+  "Admin": [
+    {
+      "id": "cmlai6flw0000uc65kbsqt4a0",
+      "username": "admin",
+      "password": "malla_password_2026",
+      "createdAt": "2026-02-06T06:27:13.560+00:00",
+      "updatedAt": "2026-02-06T06:27:13.560+00:00"
+    }
+  ],
+  "OrderItem": [
+    {
+      "id": "cmlajcqqn000104kz7q18hqav",
+      "orderId": "cmlajcqau000004kzo832x4d8",
+      "productId": "cmlai8vjn0003r865dijfv5wg",
+      "quantity": 1,
+      "price": 1200
+    },
+    {
+      "id": "cmlajs5jq000104jsw0gnna9h",
+      "orderId": "cmlajs53r000004jsu38c7e38",
+      "productId": "cmlai8vjn0003r865dijfv5wg",
+      "quantity": 1,
+      "price": 1200
+    },
+    {
+      "id": "cmlcdh7gh0001m065fe6itv0c",
+      "orderId": "cmlcdh70k0000m0654jq0jt9u",
+      "productId": "cmlai8vay0002r865hez3p0bs",
+      "quantity": 1,
+      "price": 22000
+    },
+    {
+      "id": "cmlcdj15t0003m0651j3sk03l",
+      "orderId": "cmlcdiz330002m0656c2mm4w5",
+      "productId": "cmlai8vay0002r865hez3p0bs",
+      "quantity": 1,
+      "price": 22000
+    },
+    {
+      "id": "cmlcdj7yb0005m065nr2db375",
+      "orderId": "cmlcdj5u20004m065wvrqeadw",
+      "productId": "cmlai8vay0002r865hez3p0bs",
+      "quantity": 1,
+      "price": 22000
+    },
+    {
+      "id": "cmlcdjqcr0007m065ldp0jv9r",
+      "orderId": "cmlcdjpp50006m065h6078nhu",
+      "productId": "cmlai8vay0002r865hez3p0bs",
+      "quantity": 1,
+      "price": 22000
+    },
+    {
+      "id": "cmlcdpfdj0009m065dsrlpgsf",
+      "orderId": "cmlcdpeg70008m065vkz05lpq",
+      "productId": "cmlai8vay0002r865hez3p0bs",
+      "quantity": 1,
+      "price": 22000
+    },
+    {
+      "id": "cmlhn5sko000104l889s4jbjl",
+      "orderId": "cmlhn5s4f000004l8s2yo8ur0",
+      "productId": "cmlai8vjn0003r865dijfv5wg",
+      "quantity": 1,
+      "price": 1200
+    },
+    {
+      "id": "cmli7r9dy000104jmvmzlnftf",
+      "orderId": "cmli7r8xk000004jmb10gsrdv",
+      "productId": "cmlai8vjn0003r865dijfv5wg",
+      "quantity": 1,
+      "price": 1200
+    }
+  ],
+  "EventRegistration": [
+    {
+      "id": "cmlb6f9pz000004l2m0c15nb0",
+      "eventId": "cmlai8w080004r865ngw5mvrn",
+      "userName": "KD MA",
+      "userEmail": "hellokdma@gmail.com",
+      "userPhone": "8056294950",
+      "responses": "{\"Name\":\"KD MA\",\"Email\":\"hellokdma@gmail.com\",\"Phone\":\"8056294950\"}",
+      "status": "registered",
+      "createdAt": "2026-02-06T17:45:57.238+00:00"
+    },
+    {
+      "id": "cmlbeplp70000cs656neb2ynt",
+      "eventId": "cmlai8w080004r865ngw5mvrn",
+      "userName": "KD MA",
+      "userEmail": "hellokdma@gmail.com",
+      "userPhone": "999999999",
+      "responses": "{\"Name\":\"KD MA\",\"Email\":\"hellokdma@gmail.com\",\"Phone\":\"999999999\"}",
+      "status": "registered",
+      "createdAt": "2026-02-06T21:37:56.251+00:00"
+    }
+  ],
+  "Order": [
+    {
+      "id": "cmlajcqau000004kzo832x4d8",
+      "customerName": "Black Joker",
+      "customerEmail": "sivareshanthbuissness9871@gmail.com",
+      "customerPhone": "8056294950",
+      "address": "Keep",
+      "totalAmount": 1200,
+      "status": "pending",
+      "createdAt": "2026-02-06T07:00:07.590+00:00",
+      "updatedAt": "2026-02-06T07:00:07.590+00:00"
+    },
+    {
+      "id": "cmlajs53r000004jsu38c7e38",
+      "customerName": "aswin j",
+      "customerEmail": "aswin10498@gmail.com",
+      "customerPhone": "07811015918",
+      "address": "as",
+      "totalAmount": 1200,
+      "status": "pending",
+      "createdAt": "2026-02-06T07:12:06.614+00:00",
+      "updatedAt": "2026-02-06T07:12:06.614+00:00"
+    },
+    {
+      "id": "cmlcdh70k0000m0654jq0jt9u",
+      "customerName": "Reshanth R",
+      "customerEmail": "sivareshanth9871@gmail.com",
+      "customerPhone": "98056294950",
+      "address": "rwerrwr",
+      "totalAmount": 22000,
+      "status": "pending",
+      "createdAt": "2026-02-07T13:51:10.530+00:00",
+      "updatedAt": "2026-02-07T13:51:10.530+00:00"
+    },
+    {
+      "id": "cmlcdiz330002m0656c2mm4w5",
+      "customerName": "Reshanth R",
+      "customerEmail": "sivareshanth9871@gmail.com",
+      "customerPhone": "98056294950",
+      "address": "rwerrwr",
+      "totalAmount": 22000,
+      "status": "pending",
+      "createdAt": "2026-02-07T13:52:33.567+00:00",
+      "updatedAt": "2026-02-07T13:52:33.567+00:00"
+    },
+    {
+      "id": "cmlcdj5u20004m065wvrqeadw",
+      "customerName": "Reshanth R",
+      "customerEmail": "sivareshanth9871@gmail.com",
+      "customerPhone": "98056294950",
+      "address": "rwerrwr",
+      "totalAmount": 22000,
+      "status": "pending",
+      "createdAt": "2026-02-07T13:52:42.314+00:00",
+      "updatedAt": "2026-02-07T13:52:42.314+00:00"
+    },
+    {
+      "id": "cmlcdjpp50006m065h6078nhu",
+      "customerName": "Reshanth R",
+      "customerEmail": "sivareshanth9871@gmail.com",
+      "customerPhone": "98056294950",
+      "address": "erer",
+      "totalAmount": 22000,
+      "status": "pending",
+      "createdAt": "2026-02-07T13:53:08.057+00:00",
+      "updatedAt": "2026-02-07T13:53:08.057+00:00"
+    },
+    {
+      "id": "cmlcdpeg70008m065vkz05lpq",
+      "customerName": "Reshanth R",
+      "customerEmail": "sivareshanth9871@gmail.com",
+      "customerPhone": "98056294950",
+      "address": "wqwrqr",
+      "totalAmount": 22000,
+      "status": "pending",
+      "createdAt": "2026-02-07T13:57:33.414+00:00",
+      "updatedAt": "2026-02-07T13:57:33.414+00:00"
+    },
+    {
+      "id": "cmlhn5s4f000004l8s2yo8ur0",
+      "customerName": "kdma",
+      "customerEmail": "fsgfsdg",
+      "customerPhone": "dgsgd",
+      "address": "dsgdgs",
+      "totalAmount": 1200,
+      "status": "pending",
+      "createdAt": "2026-02-11T06:21:05.054+00:00",
+      "updatedAt": "2026-02-11T06:21:05.054+00:00"
+    },
+    {
+      "id": "cmli7r8xk000004jmb10gsrdv",
+      "customerName": "dfhfd",
+      "customerEmail": "dfdfhd",
+      "customerPhone": "hhfddfhd",
+      "address": "hdfhfdhfd",
+      "totalAmount": 1200,
+      "status": "pending",
+      "createdAt": "2026-02-11T15:57:38.934+00:00",
+      "updatedAt": "2026-02-11T15:57:38.934+00:00"
+    }
+  ],
+  "User": [
+    {
+      "id": "cmlbbpsiy0000ec656to8w4cv",
+      "name": "reshanth",
+      "email": "sivareshanth9871@gmail.com",
+      "phone": "8056294950",
+      "password": "Htnahser@9871",
+      "createdAt": "2026-02-06T20:14:06.250+00:00",
+      "updatedAt": "2026-02-06T20:14:06.250+00:00"
+    },
+    {
+      "id": "cmlbu7v77000004js1oq53z67",
+      "name": "Anidha",
+      "email": "anidhaani2002@gmail.com",
+      "phone": "8148050481",
+      "password": "Airumel@321",
+      "createdAt": "2026-02-07T04:52:02.611+00:00",
+      "updatedAt": "2026-02-07T04:52:02.611+00:00"
+    }
+  ],
+  "OtpVerification": [],
+  "PasswordReset": [],
+  "NewsletterSubscriber": [
+    {
+      "id": "cmlbequd10002cs65z84qywmu",
+      "email": "hellokdma@gmail.com",
+      "createdAt": "2026-02-06T21:38:53.912+00:00"
+    }
+  ],
+  "Training": [
+    {
+      "id": "t1",
+      "title": "Foundation Mallarkambam",
+      "description": "Master the core pillars of Mallarkambam. Focus on grip, balance, and fundamental aerial maneuvers.",
+      "duration": "3 Months",
+      "level": "Beginner",
+      "image": "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?q=80&w=1000&auto=format&fit=crop",
+      "category": "Traditional",
+      "isActive": 1,
+      "createdAt": "2026-02-06 20:23:41",
+      "updatedAt": "2026-02-06T21:34:09.187+00:00",
+      "formConfig": null,
+      "endDate": "2026-02-28T00:00:00.000+00:00",
+      "startDate": "2026-02-07T00:00:00.000+00:00"
+    },
+    {
+      "id": "t2",
+      "title": "Elite Tactical Conditioning",
+      "description": "Advanced physical preparation using high-intensity combat simulations and ancient Indian calisthenics.",
+      "duration": "6 Weeks",
+      "level": "Advanced",
+      "image": "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?q=80&w=1000&auto=format&fit=crop",
+      "category": "Modern",
+      "isActive": 1,
+      "createdAt": "2026-02-06 20:23:41",
+      "updatedAt": "2026-02-06 20:23:41",
+      "formConfig": null,
+      "endDate": null,
+      "startDate": null
+    }
+  ],
+  "Camp": [
+    {
+      "id": "c1",
+      "title": "Winter Warrior Camp 2026",
+      "description": "A 7-day immersive experience in the rugged mountains. Survival training meets ancient martial arts.",
+      "startDate": "2026-12-15T09:00:00Z",
+      "endDate": "2026-12-22T18:00:00Z",
+      "location": "Sahyadri Ranges",
+      "image": "https://images.unsplash.com/photo-1464822759023-fed622ff2c3b?q=80&w=1000&auto=format&fit=crop",
+      "price": 15000,
+      "isActive": 1,
+      "createdAt": "2026-02-06 20:23:41",
+      "updatedAt": "2026-02-06 20:23:41",
+      "formConfig": null
+    }
+  ],
+  "TrainingRegistration": [
+    {
+      "id": "cmlbeq4j10001cs65rzv9rsqt",
+      "trainingId": "t1",
+      "userName": "KD MA",
+      "userEmail": "hellokdma@gmail.com",
+      "userPhone": "656666564894",
+      "responses": "{\"Name\":\"KD MA\",\"Email\":\"hellokdma@gmail.com\",\"Phone\":\"656666564894\"}",
+      "status": "registered",
+      "createdAt": "2026-02-06T21:38:20.653+00:00"
+    }
+  ],
+  "CampRegistration": [],
+  "CommitteeMember": [
+    {
+      "id": "dummy_oapuw9f3q",
+      "name": "John Doe",
+      "position": "President",
+      "image": "/images/heritage-master.png",
+      "description": null,
+      "category": "President",
+      "order": 10,
+      "createdAt": "2026-02-10T16:56:17.880Z",
+      "updatedAt": "2026-02-10T16:56:17.880Z"
+    },
+    {
+      "id": "dummy_apkp4vzbm",
+      "name": "Jane Smith",
+      "position": "Vice President",
+      "image": "/images/unified-hero-athlete.png",
+      "description": null,
+      "category": "Vice president",
+      "order": 20,
+      "createdAt": "2026-02-10T16:56:18.003Z",
+      "updatedAt": "2026-02-10T16:56:18.003Z"
+    },
+    {
+      "id": "dummy_x1m5avoh1",
+      "name": "Peter Parker",
+      "position": "Secretary",
+      "image": "/images/benefit-discipline.jpg",
+      "description": null,
+      "category": "Secretary",
+      "order": 30,
+      "createdAt": "2026-02-10T16:56:18.101Z",
+      "updatedAt": "2026-02-10T16:56:18.101Z"
+    },
+    {
+      "id": "dummy_drtepdz5r",
+      "name": "Mary Jane",
+      "position": "Joint Secretary",
+      "image": "/images/athlete-hero.png",
+      "description": null,
+      "category": "Joint secretary",
+      "order": 40,
+      "createdAt": "2026-02-10T16:56:18.191Z",
+      "updatedAt": "2026-02-10T16:56:18.191Z"
+    },
+    {
+      "id": "dummy_krwu2agas",
+      "name": "Steve Rogers",
+      "position": "Coordinator",
+      "image": "/images/hero-athlete.jpg",
+      "description": null,
+      "category": "Cordinator",
+      "order": 50,
+      "createdAt": "2026-02-10T16:56:18.298Z",
+      "updatedAt": "2026-02-10T16:56:18.298Z"
+    },
+    {
+      "id": "dummy_agsvixxvd",
+      "name": "Tony Stark",
+      "position": "Treasurer",
+      "image": "/images/benefit-strength.jpg",
+      "description": null,
+      "category": "Tressurer",
+      "order": 60,
+      "createdAt": "2026-02-10T16:56:18.413Z",
+      "updatedAt": "2026-02-10T16:56:18.413Z"
+    },
+    {
+      "id": "dummy_uok4kgre7",
+      "name": "Bruce Banner",
+      "position": "Executive Member",
+      "image": "/images/stats-bg.png",
+      "description": null,
+      "category": "Executive comittee",
+      "order": 70,
+      "createdAt": "2026-02-10T16:56:18.533Z",
+      "updatedAt": "2026-02-10T16:56:18.533Z"
+    },
+    {
+      "id": "dummy_wn1b2t2mr",
+      "name": "Natasha Romanoff",
+      "position": "Executive Member",
+      "image": "/images/benefit-flexibility.png",
+      "description": null,
+      "category": "Executive comittee",
+      "order": 80,
+      "createdAt": "2026-02-10T16:56:18.649Z",
+      "updatedAt": "2026-02-10T16:56:18.649Z"
+    }
+  ],
+  "Document": [
+    {
+      "id": "cmlhkoqnc000004l2x3zr1hgm",
+      "title": "Registration",
+      "description": null,
+      "fileName": "mallar__1_.pdf",
+      "filePath": "https://mklzbhjk7do1u44n.public.blob.vercel-storage.com/documents/registration/1770786709513_mallar__1_.pdf",
+      "category": "REGISTRATION",
+      "fileSize": 94548,
+      "fileType": "application/pdf",
+      "isPublic": 1,
+      "createdAt": "2026-02-11T05:11:50.760+00:00",
+      "updatedAt": "2026-02-11T05:11:50.760+00:00"
+    }
+  ]
+}

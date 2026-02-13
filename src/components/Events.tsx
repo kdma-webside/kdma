@@ -148,12 +148,16 @@ const Events = ({
     showHeader = true,
     onEventSelect,
     selectedEventId,
-    initialEvents = []
+    initialEvents = [],
+    title = "Events & Milestones",
+    subTitle = "CHRONICLES"
 }: {
     showHeader?: boolean,
     onEventSelect?: (eventId: string) => void,
     selectedEventId?: string,
-    initialEvents?: any[]
+    initialEvents?: any[],
+    title?: string,
+    subTitle?: string
 }) => {
     const eventsToDisplay = initialEvents;
 
@@ -167,12 +171,16 @@ const Events = ({
                 {showHeader && (
                     <div className="flex flex-col mb-24 text-center lg:text-left">
                         <div className="flex items-center justify-center lg:justify-start space-x-4 mb-4">
-                            <span className="text-orange-500 text-xs tracking-[1em] font-black uppercase">CHRONICLES</span>
+                            <span className="text-orange-500 text-xs tracking-[1em] font-black uppercase">{subTitle}</span>
                             <div className="h-[1px] w-12 bg-orange-600" />
                         </div>
 
                         <h2 className="text-white text-4xl md:text-6xl lg:text-8xl font-black tracking-tighter uppercase leading-tight md:leading-none font-sans mb-8">
-                            Events & <span className="text-orange-600">Milestones</span>
+                            {title.includes('&') ? (
+                                <>
+                                    {title.split('&')[0]} & <span className="text-orange-600">{title.split('&')[1]}</span>
+                                </>
+                            ) : title}
                         </h2>
 
                         <p className="text-gray-400 text-lg lg:text-xl font-sans font-medium max-w-2xl opacity-80 mb-8">

@@ -48,8 +48,8 @@ model OrderItem {
   productId String
   quantity  Int
   price     Float
-  product   Product @relation(fields: [productId], references: [id])
   order     Order   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  product   Product @relation(fields: [productId], references: [id])
 }
 
 model Event {
@@ -57,7 +57,6 @@ model Event {
   title         String
   description   String
   eventDate     DateTime            @default(now())
-  endDate       DateTime?
   month         String
   day           String
   location      String
@@ -66,6 +65,7 @@ model Event {
   createdAt     DateTime            @default(now())
   updatedAt     DateTime            @updatedAt
   formConfig    String?
+  endDate       DateTime?
   registrations EventRegistration[]
 }
 
@@ -116,8 +116,8 @@ model OtpVerification {
   phone      String    @unique
   code       String
   expiresAt  DateTime
-  verifiedAt DateTime?
   createdAt  DateTime  @default(now())
+  verifiedAt DateTime?
 }
 
 model PasswordReset {
@@ -148,12 +148,12 @@ model Training {
   id            String                 @id @default(cuid())
   title         String
   description   String
-  duration      String?                // Optional: e.g., "3 Months", "6 Weeks"
+  duration      String?
   startDate     DateTime?
   endDate       DateTime?
-  level         String                 // e.g., "Beginner", "Advanced"
+  level         String
   image         String
-  category      String                 // e.g., "Traditional", "Modern"
+  category      String
   isActive      Boolean                @default(true)
   createdAt     DateTime               @default(now())
   updatedAt     DateTime               @updatedAt
@@ -162,43 +162,43 @@ model Training {
 }
 
 model Camp {
-  id          String   @id @default(cuid())
-  title       String
-  description String
-  startDate   DateTime
-  endDate     DateTime
-  location    String
-  image       String
-  price       Float
-  isActive    Boolean  @default(true)
-  createdAt   DateTime @default(now())
-  updatedAt   DateTime @updatedAt
-  formConfig  String?
+  id            String             @id @default(cuid())
+  title         String
+  description   String
+  startDate     DateTime
+  endDate       DateTime
+  location      String
+  image         String
+  price         Float
+  isActive      Boolean            @default(true)
+  createdAt     DateTime           @default(now())
+  updatedAt     DateTime           @updatedAt
+  formConfig    String?
   registrations CampRegistration[]
 }
 
 model TrainingRegistration {
-  id        String   @id @default(cuid())
+  id         String   @id @default(cuid())
   trainingId String
-  training  Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
-  userName  String
-  userEmail String
-  userPhone String
-  responses String // JSON string
-  status    String   @default("registered")
-  createdAt DateTime @default(now())
+  userName   String
+  userEmail  String
+  userPhone  String
+  responses  String
+  status     String   @default("registered")
+  createdAt  DateTime @default(now())
+  training   Training @relation(fields: [trainingId], references: [id], onDelete: Cascade)
 }
 
 model CampRegistration {
   id        String   @id @default(cuid())
   campId    String
-  camp      Camp     @relation(fields: [campId], references: [id], onDelete: Cascade)
   userName  String
   userEmail String
   userPhone String
-  responses String // JSON string
+  responses String
   status    String   @default("registered")
   createdAt DateTime @default(now())
+  camp      Camp     @relation(fields: [campId], references: [id], onDelete: Cascade)
 }
 
 model CommitteeMember {
@@ -207,7 +207,7 @@ model CommitteeMember {
   position    String
   image       String
   description String?
-  category    String   // e.g., "LEADERSHIP", "CORE TEAM", "EXECUTIVE COUNCIL", "OPERATIONS"
+  category    String
   order       Int      @default(0)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
@@ -219,11 +219,10 @@ model Document {
   description String?
   fileName    String
   filePath    String
-  category    String   // e.g., "REGISTRATION", "LETTERPAD", "RULES", "CERTIFICATES", "GENERAL"
-  fileSize    Int      // in bytes
-  fileType    String   // e.g., "application/pdf", "image/png"
+  category    String
+  fileSize    Int
+  fileType    String
   isPublic    Boolean  @default(true)
   createdAt   DateTime @default(now())
   updatedAt   DateTime @updatedAt
 }
-

@@ -34,10 +34,19 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
         });
     }, [events]);
 
+    // Separate upcoming and completed events
+    const upcomingEvents = useMemo(() => {
+        return sortedEvents.filter(e => e.status === 'upcoming');
+    }, [sortedEvents]);
+
+    const completedEvents = useMemo(() => {
+        return sortedEvents.filter(e => e.status === 'completed');
+    }, [sortedEvents]);
+
     // Find nearest upcoming event for default selection
     const nearestUpcomingEvent = useMemo(() => {
-        return sortedEvents.find(e => e.eventDate && new Date(e.eventDate) >= now) || sortedEvents[0];
-    }, [sortedEvents]);
+        return upcomingEvents.find(e => e.eventDate && new Date(e.eventDate) >= now) || upcomingEvents[0];
+    }, [upcomingEvents]);
 
     const [selectedEventId, setSelectedEventId] = useState(eventIdFromUrl || nearestUpcomingEvent?.id);
 
@@ -54,7 +63,7 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
     }, []);
 
     const activeEvent = useMemo(() => {
-        const found = sortedEvents.find(e => e.id === selectedEventId);
+        const found = upcomingEvents.find(e => e.id === selectedEventId);
         const calculateDays = (dateStr: string | Date) => {
             const eventD = new Date(dateStr);
             eventD.setHours(0, 0, 0, 0);
@@ -69,7 +78,7 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
                 daysRemaining: calculateDays(found.eventDate)
             };
         }
-        const defaultEvent = nearestUpcomingEvent || sortedEvents[0];
+        const defaultEvent = nearestUpcomingEvent || upcomingEvents[0];
         if (!defaultEvent) return null;
 
         return {
@@ -77,7 +86,7 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
             date: { month: defaultEvent?.month, day: defaultEvent?.day },
             daysRemaining: defaultEvent ? calculateDays(defaultEvent.eventDate) : 0
         };
-    }, [selectedEventId, sortedEvents, nearestUpcomingEvent, todayAtMidnight]);
+    }, [selectedEventId, upcomingEvents, nearestUpcomingEvent, todayAtMidnight]);
 
     const handleEventSelect = (id: string) => {
         setSelectedEventId(id);
@@ -94,7 +103,7 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
             </div>
 
             <EventCalendar
-                events={sortedEvents}
+                events={upcomingEvents}
                 onEventSelect={handleEventSelect}
                 selectedEventId={selectedEventId}
             />
@@ -103,8 +112,19 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
                 showHeader={false}
                 onEventSelect={handleEventSelect}
                 selectedEventId={selectedEventId}
-                initialEvents={sortedEvents}
+                initialEvents={upcomingEvents}
             />
+
+            {completedEvents.length > 0 && (
+                <div className="pt-20 border-t border-white/5">
+                    <Events
+                        showHeader={true}
+                        title="Completed & Memories"
+                        subTitle="MUSEUM"
+                        initialEvents={completedEvents}
+                    />
+                </div>
+            )}
         </>
     );
 };
