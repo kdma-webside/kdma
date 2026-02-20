@@ -3,7 +3,7 @@ require('dotenv').config();
 
 async function main() {
     console.log('--- Seeding Committee Dummy Data (v2) ---');
-    const url = process.env.DATABASE_URL;
+    const url = "https://kdma-kdma.aws-ap-south-1.turso.io";
     const authToken = process.env.TURSO_AUTH_TOKEN;
 
     if (!url) {

@@ -74,16 +74,19 @@ const CommitteeGrid = () => {
         fetchMembers();
     }, []);
 
-    const filterByCategory = (category: string) => members.filter(m => m.category === category);
+    const filterByCategory = (categoryPaths: string[]) =>
+        members.filter(m =>
+            categoryPaths.some(path => m.category?.toLowerCase() === path.toLowerCase())
+        );
 
     const sections = [
-        { title: "President", members: filterByCategory("President") },
-        { title: "Vice President", members: filterByCategory("Vice president") },
-        { title: "Secretary", members: filterByCategory("Secretary") },
-        { title: "Joint Secretary", members: filterByCategory("Joint secretary") },
-        { title: "Coordinator", members: filterByCategory("Cordinator") },
-        { title: "Treasurer", members: filterByCategory("Tressurer") },
-        { title: "Executive Committee", members: filterByCategory("Executive comittee") }
+        { title: "President", members: filterByCategory(["President"]) },
+        { title: "Vice President", members: filterByCategory(["Vice president", "VicePresident"]) },
+        { title: "Secretary", members: filterByCategory(["Secretary"]) },
+        { title: "Joint Secretary", members: filterByCategory(["Joint secretary", "JointSecretary"]) },
+        { title: "Coordinator", members: filterByCategory(["Coordinator", "Cordinator", "Technical"]) },
+        { title: "Treasurer", members: filterByCategory(["Treasurer", "Tressurer"]) },
+        { title: "Executive Committee", members: filterByCategory(["Executive committee", "Executive comittee", "Executive", "General"]) }
     ];
 
     if (loading) {
