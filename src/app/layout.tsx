@@ -95,7 +95,13 @@ export default async function RootLayout({
               <LoadingBar />
               <ScrollToTop />
               <MagicCursor />
-              <CartDrawer session={session} />
+              <CartDrawer
+                session={session}
+                upiConfig={{
+                  upiId: process.env.NEXT_PUBLIC_UPI_ID,
+                  qrCodeUrl: process.env.NEXT_PUBLIC_UPI_QR_CODE_URL
+                }}
+              />
               <EnquiryModal />
               {children}
               <Navbar session={session} />

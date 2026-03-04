@@ -8,7 +8,7 @@ import UpiPaymentModal from '@/components/UpiPaymentModal';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const CartDrawer = ({ session: initialSession }: { session?: any }) => {
+const CartDrawer = ({ session: initialSession, upiConfig }: { session?: any; upiConfig?: { upiId?: string; qrCodeUrl?: string } }) => {
     const {
         isCartOpen,
         setIsCartOpen,
@@ -73,7 +73,7 @@ const CartDrawer = ({ session: initialSession }: { session?: any }) => {
         const checkAuth = async () => {
             let session = initialSession;
 
-            if (session === undefined) {
+            if (!session) {
                 try {
                     const { getCurrentSession } = await import('@/app/actions/users');
                     session = await getCurrentSession();
@@ -379,8 +379,8 @@ const CartDrawer = ({ session: initialSession }: { session?: any }) => {
                     setCheckoutDetails({ name: '', email: '', phone: '', address: '' });
                 }}
                 amount={subtotal}
-                upiId={process.env.NEXT_PUBLIC_UPI_ID || 'your-upi-id@paytm'}
-                qrCodeUrl={process.env.NEXT_PUBLIC_UPI_QR_CODE_URL}
+                upiId={upiConfig?.upiId || process.env.NEXT_PUBLIC_UPI_ID || 'your-upi-id@paytm'}
+                qrCodeUrl={upiConfig?.qrCodeUrl || process.env.NEXT_PUBLIC_UPI_QR_CODE_URL}
             />
         </AnimatePresence>
     );
