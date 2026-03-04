@@ -20,7 +20,7 @@ export async function createUser(data: any) {
         }
     });
 
-    await setSession({ id: user.id, name: user.name, email: user.email });
+    await setSession({ id: user.id, name: user.name, email: user.email, phone: user.phone });
 
     revalidatePath('/admin/users');
     return user;
@@ -39,7 +39,7 @@ export async function verifyUser(data: any) {
         throw new Error('Invalid credentials');
     }
 
-    const userData = { id: user.id, name: user.name, email: user.email };
+    const userData = { id: user.id, name: user.name, email: user.email, phone: user.phone || '' };
     await setSession(userData);
 
     return { success: true, user: userData };

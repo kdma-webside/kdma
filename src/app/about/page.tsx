@@ -1,4 +1,3 @@
-import Navbar from '@/components/Navbar';
 import AboutHero from '@/components/AboutHero';
 import Heritage from '@/components/Heritage';
 import Mission from '@/components/Mission';
@@ -18,7 +17,6 @@ export const metadata: Metadata = {
 export default function AboutPage() {
     return (
         <main className="bg-black">
-            <Navbar />
             <AboutHero />
             <Heritage />
             <Mission />

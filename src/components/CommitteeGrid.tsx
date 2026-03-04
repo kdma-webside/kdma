@@ -56,23 +56,25 @@ const CommitteeMemberCard = ({ name, position, image, description, index }: Comm
     );
 };
 
-const CommitteeGrid = () => {
-    const [members, setMembers] = useState<any[]>([]);
-    const [loading, setLoading] = useState(true);
+const CommitteeGrid = ({ initialMembers }: { initialMembers?: any[] }) => {
+    const [members, setMembers] = useState<any[]>(initialMembers || []);
+    const [loading, setLoading] = useState(!initialMembers);
 
     useEffect(() => {
-        const fetchMembers = async () => {
-            try {
-                const data = await getCommitteeMembers();
-                setMembers(data);
-            } catch (error) {
-                console.error('Error fetching committee members:', error);
-            } finally {
-                setLoading(false);
-            }
-        };
-        fetchMembers();
-    }, []);
+        if (!initialMembers) {
+            const fetchMembers = async () => {
+                try {
+                    const data = await getCommitteeMembers();
+                    setMembers(data);
+                } catch (error) {
+                    console.error('Error fetching committee members:', error);
+                } finally {
+                    setLoading(false);
+                }
+            };
+            fetchMembers();
+        }
+    }, [initialMembers]);
 
     const filterByCategory = (categoryPaths: string[]) =>
         members.filter(m =>

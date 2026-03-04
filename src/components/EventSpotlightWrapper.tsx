@@ -36,8 +36,8 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
 
     // Separate upcoming and completed events
     const upcomingEvents = useMemo(() => {
-        return sortedEvents.filter(e => e.status === 'upcoming');
-    }, [sortedEvents]);
+        return sortedEvents.filter(e => e.status === 'upcoming' && new Date(e.eventDate) >= now);
+    }, [sortedEvents, now]);
 
     const completedEvents = useMemo(() => {
         return sortedEvents.filter(e => e.status === 'completed');
@@ -45,8 +45,9 @@ const EventSpotlightWrapper = ({ events, initialId }: EventSpotlightWrapperProps
 
     // Find nearest upcoming event for default selection
     const nearestUpcomingEvent = useMemo(() => {
-        return upcomingEvents.find(e => e.eventDate && new Date(e.eventDate) >= now) || upcomingEvents[0];
-    }, [upcomingEvents]);
+        const future = upcomingEvents.filter(e => e.eventDate && new Date(e.eventDate) >= now);
+        return future.length > 0 ? future[0] : upcomingEvents[0];
+    }, [upcomingEvents, now]);
 
     const [selectedEventId, setSelectedEventId] = useState(eventIdFromUrl || nearestUpcomingEvent?.id);
 

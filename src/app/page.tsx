@@ -1,4 +1,3 @@
-import Navbar from "@/components/Navbar";
 import Hero from "@/components/Hero";
 import Benefits from "@/components/Benefits";
 import Heritage from "@/components/Heritage";
@@ -31,7 +30,6 @@ export default async function Home() {
 
   return (
     <main className="relative min-h-screen bg-black overflow-x-hidden">
-      <Navbar />
       <Hero
         headline={heroData['hero.headline']}
         subheadline={heroData['hero.subheadline']}

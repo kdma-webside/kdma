@@ -9,20 +9,23 @@ import Link from 'next/link';
 import MagneticButton from '@/components/ui/MagneticButton';
 import { getCurrentSession, logout } from '@/app/actions/users';
 
-const Navbar = () => {
+const Navbar = ({ session: initialSession }: { session?: any }) => {
   const pathname = usePathname();
   const { totalItems, setIsCartOpen } = useCart();
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const [session, setSession] = useState<any>(null);
+  const [session, setSession] = useState<any>(initialSession || null);
 
   useEffect(() => {
-    const fetchSession = async () => {
-      const currentSession = await getCurrentSession();
-      setSession(currentSession);
-    };
-    fetchSession();
-  }, []);
+    // If we didn't get an initial session (e.g. client-side navigation or direct usage), fetch it
+    if (!initialSession) {
+      const fetchSession = async () => {
+        const currentSession = await getCurrentSession();
+        setSession(currentSession);
+      };
+      fetchSession();
+    }
+  }, [initialSession]);
 
   const handleLogout = async () => {
     await logout();
@@ -56,7 +59,7 @@ const Navbar = () => {
 
   return (
     <>
-      <nav className={`fixed top-0 left-0 w-full z-[100] px-6 lg:px-24 py-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-2xl border-b border-white/5 py-4' : 'bg-gradient-to-b from-black to-transparent'}`}>
+      <nav className={`fixed top-0 left-0 w-full z-[150] px-6 lg:px-24 py-6 flex items-center justify-between transition-all duration-300 ${isScrolled ? 'bg-black/95 backdrop-blur-2xl border-b border-white/5 py-4' : 'bg-gradient-to-b from-black to-transparent'}`}>
         {/* Logo */}
         <div className="flex items-center">
           <MagneticButton>

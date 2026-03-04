@@ -1,9 +1,7 @@
 import React, { Suspense } from 'react';
-import Navbar from '@/components/Navbar';
 import EventsHero from '@/components/EventsHero';
 import EventSpotlightWrapper from '@/components/EventSpotlightWrapper';
 import Footer from '@/components/Footer';
-import ScrollToTop from '@/components/ScrollToTop';
 import { getEvents } from '@/app/actions/events';
 import { unstable_noStore } from 'next/cache';
 
@@ -17,16 +15,16 @@ export default async function EventsPage({
     unstable_noStore();
     const { id: eventId } = await searchParams;
     const events = await getEvents();
-    const upcomingEvents = events.filter(e => e.status === 'upcoming');
+    const now = new Date();
+    const futureEvents = events.filter(e => new Date(e.eventDate) >= now);
+    const nextEvent = futureEvents.sort((a, b) => new Date(a.eventDate).getTime() - new Date(b.eventDate).getTime())[0];
 
     return (
         <main className="relative min-h-screen bg-black overflow-x-hidden">
             <Suspense fallback={<div className="h-20 bg-black" />}>
-                <Navbar />
-                <EventsHero nextEvent={upcomingEvents[0] || events[0]} />
+                <EventsHero nextEvent={nextEvent} />
                 <EventSpotlightWrapper events={events} initialId={eventId as string} />
                 <Footer />
-                <ScrollToTop />
             </Suspense>
         </main>
     );

@@ -1,8 +1,6 @@
 import React from 'react';
-import Navbar from '@/components/Navbar';
 import StoreHero from '@/components/StoreHero';
 import ProductGrid from '@/components/ProductGrid';
-import ScrollToTop from '@/components/ScrollToTop';
 import { getProducts } from '@/app/actions/store';
 import { getContent } from '@/app/actions/content';
 
@@ -21,8 +19,6 @@ export default async function StorePage() {
 
     return (
         <main className="relative min-h-screen bg-black overflow-x-hidden">
-            <ScrollToTop />
-            <Navbar />
 
             <StoreHero title={storeData['store.hero_title']} />
 

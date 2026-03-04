@@ -39,8 +39,8 @@ export default function UpiPaymentModal({
     };
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/80 p-4">
-            <div className="relative w-full max-w-md bg-gradient-to-br from-neutral-900 to-neutral-800 border border-orange-500/30 rounded-2xl p-8 mx-4">
+        <div className="fixed inset-0 z-[400] flex items-center justify-center bg-black/80 p-4">
+            <div className="relative w-full max-w-md bg-gradient-to-br from-neutral-900 to-neutral-800 border border-orange-500/30 rounded-2xl p-8 mx-4 max-h-[90vh] overflow-y-auto">
                 <button
                     onClick={handleClose}
                     className="absolute top-4 right-4 text-neutral-400 hover:text-white transition"

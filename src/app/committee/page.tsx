@@ -1,7 +1,7 @@
-import Navbar from '../../components/Navbar';
 import CommitteeHero from '../../components/CommitteeHero';
 import CommitteeGrid from '../../components/CommitteeGrid';
 import { Metadata } from 'next';
+import { getCommitteeMembers } from '@/app/actions/committee';
 
 export const metadata: Metadata = {
     title: 'Committee - Mallakhamb Kanyakumari',
@@ -9,12 +9,13 @@ export const metadata: Metadata = {
     keywords: 'KDMA committee, Mallakhamb leadership, committee members, organization structure, Kanyakumari sports committee',
 };
 
-export default function CommitteePage() {
+export default async function CommitteePage() {
+    const members = await getCommitteeMembers();
+
     return (
         <main className="bg-black">
-            <Navbar />
             <CommitteeHero />
-            <CommitteeGrid />
+            <CommitteeGrid initialMembers={members} />
         </main>
     );
 }

@@ -72,15 +72,19 @@ import ScrollToTop from "@/components/ScrollToTop";
 import CartDrawer from "@/components/CartDrawer";
 import EnquiryModal from "@/components/EnquiryModal";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Navbar from "@/components/Navbar";
 import { CartProvider } from "@/context/CartContext";
 import { EnquiryProvider } from "@/context/EnquiryContext";
 import { CursorProvider } from "@/context/CursorContext";
+import { getCurrentSession } from "@/app/actions/users";
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  const session = await getCurrentSession();
+
   return (
     <html lang="en" className={`${inter.variable} ${montserrat.variable} ${playfair.variable}`}>
       <body className="antialiased cursor-none bg-black">
@@ -91,9 +95,10 @@ export default function RootLayout({
               <LoadingBar />
               <ScrollToTop />
               <MagicCursor />
-              <CartDrawer />
+              <CartDrawer session={session} />
               <EnquiryModal />
               {children}
+              <Navbar session={session} />
             </CursorProvider>
           </EnquiryProvider>
         </CartProvider>

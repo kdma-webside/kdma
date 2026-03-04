@@ -11,7 +11,7 @@ const EventsHero = ({ nextEvent }: { nextEvent?: any }) => {
         const now = new Date();
         const eventDate = new Date(nextEvent.eventDate);
         const diffTime = eventDate.getTime() - now.getTime();
-        return Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+        return Math.max(0, Math.ceil(diffTime / (1000 * 60 * 60 * 24)));
     }, [nextEvent]);
 
     return (

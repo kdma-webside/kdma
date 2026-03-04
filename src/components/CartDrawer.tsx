@@ -8,7 +8,7 @@ import UpiPaymentModal from '@/components/UpiPaymentModal';
 import Image from 'next/image';
 import { useRouter } from 'next/navigation';
 
-const CartDrawer = () => {
+const CartDrawer = ({ session: initialSession }: { session?: any }) => {
     const {
         isCartOpen,
         setIsCartOpen,
@@ -63,22 +63,38 @@ const CartDrawer = () => {
     });
     const [isCheckingOut, setIsCheckingOut] = React.useState(false);
     const [showUpiModal, setShowUpiModal] = React.useState(false);
-    const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(null);
+    const [isAuthenticated, setIsAuthenticated] = React.useState<boolean | null>(
+        initialSession ? true : initialSession === null ? false : null
+    );
     const router = useRouter();
 
-    // Check authentication status on mount
+    // Check authentication status and autopopulate
     useEffect(() => {
         const checkAuth = async () => {
-            try {
-                const { getCurrentSession } = await import('@/app/actions/users');
-                const session = await getCurrentSession();
-                setIsAuthenticated(!!session);
-            } catch (error) {
-                setIsAuthenticated(false);
+            let session = initialSession;
+
+            if (session === undefined) {
+                try {
+                    const { getCurrentSession } = await import('@/app/actions/users');
+                    session = await getCurrentSession();
+                } catch (error) {
+                    session = null;
+                }
+            }
+
+            setIsAuthenticated(!!session);
+
+            if (session) {
+                setCheckoutDetails(prev => ({
+                    ...prev,
+                    name: prev.name || session.name || '',
+                    email: prev.email || session.email || '',
+                    phone: prev.phone || session.phone || ''
+                }));
             }
         };
         checkAuth();
-    }, []);
+    }, [initialSession]);
 
     const handleCheckout = async () => {
         if (cartItems.length === 0) return;
